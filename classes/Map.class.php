@@ -39,12 +39,16 @@ class Map {
 		$this->single    = $single;
 		$this->zoom      = $zoom;
 
-		$args = [
-			'post_type'      => $this->postType,
-			'posts_per_page' => - 1,
-		];
+		if ( is_array( $this->postType ) ) {
+			$this->items = $this->postType;
+		} else {
+			$args = [
+				'post_type'      => $this->postType,
+				'posts_per_page' => - 1,
+			];
 
-		$this->items = \DareDev\Loop::getData( $args );
+			$this->items = Loop::getData( $args );
+		}
 	}
 
 	/*
@@ -87,6 +91,10 @@ class Map {
 		$output = '';
 		if ( $this->single === true && is_singular( $this->postType ) ) {
 			$output = self::setMapData( $val );
+		} elseif ( is_array( $this->postType ) ) {
+			foreach ( $this->items as $item ) :
+				$output[] = self::setMapData( $val, $item );
+			endforeach;
 		} elseif ( $this->items ) {
 			foreach ( $this->items as $item ) :
 				$output[] = self::setMapData( $val, $item->ID );
@@ -101,16 +109,25 @@ class Map {
 	 */
 	public function setMapData( $val, $itemId = null ) {
 
-		$location = get_field( $this->dataField, $itemId );
-
-		$lat    = $location['lat'];
-		$lng    = $location['lng'];
-		$title  = ( $itemId ) ? $this->item->post_title : get_the_title();
-		$desc   = ( $itemId && $this->item->post_excerpt ) ? $this->item->post_excerpt : '';
-		$link   = get_the_permalink( $itemId );
-		$getImg = get_the_post_thumbnail( $itemId, 'icon' );
-		$img    = ( $itemId ) ? '<a href="' . $link . '">' . $getImg . '</a>' : $getImg;
-		$more   = ( $itemId ) ? '<p><a href="' . $link . '">' . $this->moreTxt . '</a></p>' : '';
+		if ( is_array( $this->postType ) ) {
+			$lat     = $itemId['lat'];
+			$lng     = $itemId['lng'];
+			$title   = $itemId['title'];
+			$excerpt = $itemId['description'];
+			$desc    = ( $excerpt ) ? $excerpt : '';
+			$img     = $itemId['image'];
+			$more    = '';
+		} else {
+			$location = get_field( $this->dataField, $itemId );
+			$lat      = $location['lat'];
+			$lng      = $location['lng'];
+			$title    = ( $itemId ) ? $this->item->post_title : get_the_title();
+			$desc     = ( $itemId && $this->item->post_excerpt ) ? $this->item->post_excerpt : '';
+			$link     = get_the_permalink( $itemId );
+			$getImg   = get_the_post_thumbnail( $itemId, 'icon' );
+			$img      = ( $itemId ) ? '<a href="' . $link . '">' . $getImg . '</a>' : $getImg;
+			$more     = ( $itemId ) ? '<p><a href="' . $link . '">' . $this->moreTxt . '</a></p>' : '';
+		}
 
 		switch ( $val ) {
 			case 'title' :
