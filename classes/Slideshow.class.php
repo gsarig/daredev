@@ -98,12 +98,18 @@ class Slideshow {
 	public function enqueueScripts() {
 		$handle   = 'dd-' . $this->script;
 		$minified = ( $this->minified ) ? '.min' : '';
-		$file     = $this->src . $this->script . $minified . '.js';
-		$path     = plugin_dir_url( __DIR__ ) . $file;
+		$filename     = $this->src . $this->script . $minified;
+		$file_js = $filename . '.js';
+		$file_css = $filename . '.css';
+		$path_js     = plugin_dir_url( __DIR__ ) . $file_js;
+		$path_css = plugin_dir_url( __DIR__ ) . $file_css;
 
-		if ( file_exists( plugin_dir_path( __DIR__ ) . $file ) ) {
-			wp_register_script( $handle, $path, $this->deps, PLUGIN_VERSION, true );
+		if ( file_exists( plugin_dir_path( __DIR__ ) . $file_js ) ) {
+			wp_register_script( $handle, $path_js, $this->deps, PLUGIN_VERSION, true );
 			wp_enqueue_script( $handle );
+		}
+		if ( file_exists( plugin_dir_path( __DIR__ ) . $file_css ) ) {
+			wp_enqueue_style($handle, $path_css, false, PLUGIN_VERSION  );
 		}
 	}
 }
