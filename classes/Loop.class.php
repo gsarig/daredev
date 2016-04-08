@@ -78,7 +78,8 @@ class Loop {
 
                 // Excerpt (uses \DareDev\Excerpt::Limit method)
                 $number = is_int($excerpt) ? $excerpt : 999;
-                $get_desc = ($excerpt) ? $this_item->post_excerpt : '';
+                $get_excerpt = ($this_item->post_excerpt) ? $this_item->post_excerpt : $this_item->post_content;
+                $get_desc = ($excerpt) ? $get_excerpt : '';
                 $more_txt = ($more) ? $more : null;
                 $lnk_id = ($more) ? $this_item->ID : '';
                 $limitDesc = Excerpt::Limit( $number, $more_txt, $get_desc, $lnk_id );
