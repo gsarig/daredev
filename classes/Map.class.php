@@ -28,8 +28,19 @@ class Map {
 	public $colors = [ ];
 	public $single;
 	public $zoom;
+	public $api;
 
-	public function __construct( $postType = 'post', $dataField = null, $mapId = 'map', $moreTxt = 'Read more', $mapIcon = null, $colors = null, $single = false, $zoom = 14 ) {
+	public function __construct( 
+		$postType = 'post', 
+		$dataField = null, 
+		$mapId = 'map', 
+		$moreTxt = 'Read more', 
+		$mapIcon = null, 
+		$colors = null, 
+		$single = false, 
+		$zoom = 14, 
+		$api = 'AIzaSyBJ5fUsd6a6pRHFNgNeA0Xue_Qny8HUZyM' 
+	) {
 		$this->postType  = $postType;
 		$this->dataField = $dataField;
 		$this->mapId     = $mapId;
@@ -38,6 +49,7 @@ class Map {
 		$this->colors    = $colors;
 		$this->single    = $single;
 		$this->zoom      = $zoom;
+		$this->api       = isset($api) ? 'key=' . $api : '';
 
 		if ( is_array( $this->postType ) ) {
 			$this->items = $this->postType;
@@ -64,7 +76,7 @@ class Map {
 	 * Enqueue scripts and pass the php variables
 	 */
 	public function enqueueScripts() {
-		wp_register_script( 'daredev-locations-api', 'https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places', true );
+		wp_register_script( 'daredev-locations-api', 'https://maps.googleapis.com/maps/api/js?' . $this->api . '&libraries=places', true );
 		wp_register_script( 'daredev-locations', plugin_dir_url( __DIR__ ) . 'js/locations.js', array( 'daredev-locations-api' ), PLUGIN_VERSION, true );
 		wp_enqueue_script( [
 			'daredev-locations-api',
