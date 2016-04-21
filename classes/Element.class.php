@@ -1,141 +1,150 @@
-<?php 
+<?php
 
 namespace DareDev;
 
 class Element {
-    
-    public static function logo($logo = 'logo') {
-        /*
-         * Show the site logo
-        */
-        $url = esc_url( home_url( '/' ) );
-        $name = get_bloginfo( 'name' );
-        $desc = get_bloginfo( 'description' );
-        $html = '<h1 class="site-title">
+
+	public static function logo( $logo = 'logo' ) {
+		/*
+		 * Show the site logo
+		*/
+		$url  = esc_url( home_url( '/' ) );
+		$name = get_bloginfo( 'name' );
+		$desc = get_bloginfo( 'description' );
+		$html = '<h1 class="site-title">
                     <a href="' . $url . '" rel="home">
-                        <img src="' . get_theme_mod($logo) . '" alt="' . $name . ' - ' . $desc . '">
+                        <img src="' . get_theme_mod( $logo ) . '" alt="' . $name . ' - ' . $desc . '">
                     </a>
                 </h1>';
 
-        return $html;
-    }
-    
-    public static function blogTitle() {
-        /*
-         * Get the blog page title (if we are in the blog page)
-        */
-        return ( get_option( 'page_for_posts' ) ) ?
-            '<h1 class="entry-title">' . get_the_title( get_option( 'page_for_posts' ) ) . '</h1>'
-                : '';
-    }
-    
-    public static function numericPagination($prevTxt = null, $nextTxt = null) {
-        /*
-         * Add numeric pagination to archives
-        */
-        if( is_singular() )
-            return;
+		return $html;
+	}
 
-        global $wp_query;
+	public static function blogTitle() {
+		/*
+		 * Get the blog page title (if we are in the blog page)
+		*/
+		return ( get_option( 'page_for_posts' ) ) ?
+			'<h1 class="entry-title">' . get_the_title( get_option( 'page_for_posts' ) ) . '</h1>'
+			: '';
+	}
 
-        /** Stop execution if there's only 1 page */
-        if( $wp_query->max_num_pages <= 1 )
-            return;
+	public static function numericPagination( $prevTxt = null, $nextTxt = null ) {
+		/*
+		 * Add numeric pagination to archives
+		*/
+		if ( is_singular() ) {
+			return;
+		}
 
-        $paged = get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1;
-        $max   = intval( $wp_query->max_num_pages );
+		global $wp_query;
 
-        /**	Add current page to the array */
-        if ( $paged >= 1 )
-            $links[] = $paged;
+		/** Stop execution if there's only 1 page */
+		if ( $wp_query->max_num_pages <= 1 ) {
+			return;
+		}
 
-	    /**	Add the pages around the current page to the array */
-	    if ( $paged >= 3 ) {
-	        $links[] = $paged - 1;
-            $links[] = $paged - 2;
-        }
+		$paged = get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1;
+		$max   = intval( $wp_query->max_num_pages );
 
-        if ( ( $paged + 2 ) <= $max ) {
-            $links[] = $paged + 2;
-            $links[] = $paged + 1;
-        }
+		/**    Add current page to the array */
+		if ( $paged >= 1 ) {
+			$links[] = $paged;
+		}
 
-        echo '<div class="pagination"><ul>' . "\n";
+		/**    Add the pages around the current page to the array */
+		if ( $paged >= 3 ) {
+			$links[] = $paged - 1;
+			$links[] = $paged - 2;
+		}
 
-        /**	Previous Post Link */
-        if ( get_previous_posts_link() )
-            printf( '<li>%s</li>' . "\n", get_previous_posts_link($prevTxt) );
+		if ( ( $paged + 2 ) <= $max ) {
+			$links[] = $paged + 2;
+			$links[] = $paged + 1;
+		}
 
-        /**	Link to first page, plus ellipses if necessary */
-        if ( ! in_array( 1, $links ) ) {
-            $class = 1 == $paged ? ' class="active"' : '';
+		echo '<div class="pagination"><ul>' . "\n";
 
-            printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( 1 ) ), '1' );
+		/**    Previous Post Link */
+		if ( get_previous_posts_link() ) {
+			printf( '<li>%s</li>' . "\n", get_previous_posts_link( $prevTxt ) );
+		}
 
-            if ( ! in_array( 2, $links ) )
-                echo '<li>…</li>';
-        }
+		/**    Link to first page, plus ellipses if necessary */
+		if ( ! in_array( 1, $links ) ) {
+			$class = 1 == $paged ? ' class="active"' : '';
 
-        /**	Link to current page, plus 2 pages in either direction if necessary */
-        sort( $links );
-        foreach ( (array) $links as $link ) {
-            $class = $paged == $link ? ' class="active"' : '';
-            printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $link ) ), $link );
-        }
+			printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( 1 ) ), '1' );
 
-        /**	Link to last page, plus ellipses if necessary */
-        if ( ! in_array( $max, $links ) ) {
-            if ( ! in_array( $max - 1, $links ) )
-            echo '<li>…</li>' . "\n";
+			if ( ! in_array( 2, $links ) ) {
+				echo '<li>…</li>';
+			}
+		}
 
-            $class = $paged == $max ? ' class="active"' : '';
-            printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $max ) ), $max );
-        }
+		/**    Link to current page, plus 2 pages in either direction if necessary */
+		sort( $links );
+		foreach ( (array) $links as $link ) {
+			$class = $paged == $link ? ' class="active"' : '';
+			printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $link ) ), $link );
+		}
 
-        /**	Next Post Link */
-        if ( get_next_posts_link() )
-            printf( '<li>%s</li>' . "\n", get_next_posts_link($nextTxt) );
+		/**    Link to last page, plus ellipses if necessary */
+		if ( ! in_array( $max, $links ) ) {
+			if ( ! in_array( $max - 1, $links ) ) {
+				echo '<li>…</li>' . "\n";
+			}
 
-        echo '</ul></div>' . "\n";
+			$class = $paged == $max ? ' class="active"' : '';
+			printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $max ) ), $max );
+		}
 
-    }
+		/**    Next Post Link */
+		if ( get_next_posts_link() ) {
+			printf( '<li>%s</li>' . "\n", get_next_posts_link( $nextTxt ) );
+		}
 
-    public static function searchBox( $txt = 'Search', $icon = '<i class="icon-search"></i>', $showButton = false ) {
-        $home_url = esc_url( home_url( '/' ) );
-		$button = ($showButton === true ) ? '<input type="submit" class="search-submit" value="'. $txt .'">' : '';
-        echo '<form role="search" method="get" class="navbar-search" action="' . $home_url . '">
+		echo '</ul></div>' . "\n";
+
+	}
+
+	public static function searchBox( $txt = 'Search', $icon = '<i class="icon-search"></i>', $showButton = false ) {
+		$home_url = esc_url( home_url( '/' ) );
+		$button   = ( $showButton === true ) ? '<input type="submit" class="search-submit" value="' . $txt . '">' : '';
+		echo '<form role="search" method="get" class="navbar-search" action="' . $home_url . '">
 				<label>
 					<span class="screen-reader-text">' . $txt . '</span>
-					<input type="search" class="search-query" placeholder="' . $txt . '" value="' . esc_attr( get_search_query()) . '" name="s">' .
-					$icon .
-				'</label>'
-				. $button .
-				'</form>';
-    }
+					<input type="search" class="search-query" placeholder="' . $txt . '" value="' . esc_attr( get_search_query() ) . '" name="s">' .
+		     $icon .
+		     '</label>'
+		     . $button .
+		     '</form>';
+	}
 
-    public static function social($array = []) {
-        /**
-         * Get social media links
-         *
-         * @param $array array ('icon-name' => 'url')
-         *
-         * @return string
-         */
-        $output = '';
-        if( $array ) {
-            $sites = '';
-            foreach ($array as $key => $value ) {
-
-                $sites .= ($value) ?
-                    '<li class="' . $key . '">
-    							<a href="' . $value . '" target="_blank">
-    								<i class="icon icon-' . $key . '"></i>
+	public static function social( $array = [ ] ) {
+		/**
+		 * Get social media links
+		 *
+		 * @param $array array ('icon-name' => 'url')
+		 *
+		 * @return string
+		 */
+		$output = '';
+		if ( $array ) {
+			$sites = '';
+			foreach ( $array as $key => $value ) {
+				$url = is_array( $value ) ? $value[0] : $value;
+				$txt = is_array( $value ) ? '<span>' . $value[1] . '</span>' : '';
+				$sites .= ( $value ) ?
+					'<li class="' . $key . '">
+    							<a href="' . $url . '" target="_blank">
+    								<i class="icon icon-' . $key . '">' . $txt . '</i>
     							</a>
     						</li>'
-                    : '';
-            }
-            $output = ($array) ? '<ul>' . $sites . '</ul>' : '';
-        }
-        return $output;
-    }
+					: '';
+			}
+			$output = ( $array ) ? '<ul>' . $sites . '</ul>' : '';
+		}
+
+		return $output;
+	}
 }
