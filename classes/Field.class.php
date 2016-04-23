@@ -15,6 +15,11 @@ class Field {
 	/**
 	 * Field constructor.
 	 *
+	 * If the second parameter is an array, it will show the passed options.
+	 * To get ACF repeater fields, use it like that:
+	 * $myfield = new \DareDev\Field( 'fieldname', 'acf_repeater_field', 'acf_repeater_subfield' );
+	 * $myfield->select();
+	 *
 	 * @param string $tagname
 	 * @param string $data
 	 * @param string $subfield
