@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="Localhost">
+  <component name="PublishConfigData">
     <serverData>
-      <paths name="Localhost">
+      <paths name="78.47.29.83">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="stafilopatis/wp-content/plugins/daredev" />
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
-      <paths name="ekornes.gr">
+      <paths name="DareDev">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/fiftyeggz/uprent.gr/wp-content/plugins/daredev" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Hetzner">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Webfaction">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />

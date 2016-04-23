@@ -35,7 +35,7 @@ class Field {
 	public function getData() {
 		$id     = ( $this->id ) ? $this->id : get_the_ID();
 		$output = [ ];
-		if ( have_rows( $this->data, $id ) ):
+		if ( is_string( $this->data ) && have_rows( $this->data, $id ) ):
 			while ( have_rows( $this->data, $id ) ) : the_row();
 				$output[] = get_sub_field( $this->subfield );
 			endwhile;
