@@ -24,10 +24,10 @@ class Slideshow {
 		$this->minified = $min;
 	}
 
-	public function show( $slides = '', $params = '', $custom_selectors = '', $custom_order = false ) {
+	public function show( $slides = '', $params = '', $custom_selectors = '', $custom_attr = [ ], $custom_order = false ) {
 		add_action( 'wp_footer', array( $this, 'enqueueScripts' ) );
 		if ( $this->script === 'custom' ) {
-			$output = self::customSlides( $params, $slides, $custom_selectors, $custom_order );
+			$output = self::customSlides( $params, $slides, $custom_selectors, $custom_attr, $custom_order );
 		} else {
 			if ( $this->script === 'slider-pro' ) {
 				$class   = 'slider-pro';
@@ -50,9 +50,15 @@ class Slideshow {
 		return $output;
 	}
 
-	public function customSlides( $controls = [ ], $slides = [ ], $selectors, $reverse = false ) {
-		$html = '';
-		$selectors = ($selectors) ? $selectors : ' class="slideshow" id="slideshow"';
+	public function customSlides( $controls = [ ], $slides = [ ], $selectors, $attributes = [ ], $reverse = false ) {
+		$html      = '';
+		$attr      = '';
+		$selectors = ( $selectors ) ? $selectors : ' class="slideshow" id="slideshow"';
+		if ( is_array( $attributes ) && ! empty( $attributes ) ) {
+			foreach ( $attributes as $key => $attribute ) {
+				$attr .= ' data-' . $key . '="' . $attribute . '"';
+			}
+		}
 		if ( is_array( $controls ) && is_array( $slides ) ) :
 			$ic             = 0;
 			$is             = 0;
@@ -71,10 +77,10 @@ class Slideshow {
 				$slide_output .= '<li id="slide-' . $is . '" class="slide' . $active . '">' . $slide . '</li>';
 			}
 			$controls_output = '<ul class="controls container">' . $control_output . '</ul>';
-			$slides_output = '<ul class="slides">' . $slide_output . '</ul>';
-			$order = ($reverse) ? $slides_output . $controls_output : $controls_output . $slides_output;
+			$slides_output   = '<ul class="slides">' . $slide_output . '</ul>';
+			$order           = ( $reverse ) ? $slides_output . $controls_output : $controls_output . $slides_output;
 
-			$html = '<div' . $selectors . '>' . $order . '</div>';
+			$html = '<div' . $selectors . $attr . '>' . $order . '</div>';
 
 		endif;
 
@@ -98,10 +104,10 @@ class Slideshow {
 	public function enqueueScripts() {
 		$handle   = 'dd-' . $this->script;
 		$minified = ( $this->minified ) ? '.min' : '';
-		$filename     = $this->src . $this->script . $minified;
-		$file_js = $filename . '.js';
+		$filename = $this->src . $this->script . $minified;
+		$file_js  = $filename . '.js';
 		$file_css = $filename . '.css';
-		$path_js     = plugin_dir_url( __DIR__ ) . $file_js;
+		$path_js  = plugin_dir_url( __DIR__ ) . $file_js;
 		$path_css = plugin_dir_url( __DIR__ ) . $file_css;
 
 		if ( file_exists( plugin_dir_path( __DIR__ ) . $file_js ) ) {
@@ -109,7 +115,7 @@ class Slideshow {
 			wp_enqueue_script( $handle );
 		}
 		if ( file_exists( plugin_dir_path( __DIR__ ) . $file_css ) ) {
-			wp_enqueue_style($handle, $path_css, false, PLUGIN_VERSION  );
+			wp_enqueue_style( $handle, $path_css, false, PLUGIN_VERSION );
 		}
 	}
 }

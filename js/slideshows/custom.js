@@ -4,14 +4,15 @@
      * @type {*|jQuery}
      * @return mixed
      * @param options
-     * Example: $('#slideshow').ddSlideshow({ speed: 2000 });
+     * Example: $('#slideshow').ddSlideshow({ speed: 2000, 'pause': '.elem-to-pause-on-hover' });
      */
     "use strict";
     $.fn.ddSlideshow = function (options) {
         var slideshow, settings;
         slideshow = this;
         settings = $.extend({
-            'speed': 6000
+            'speed': 4000,
+            'pause': false
         }, options);
 
         var controls = slideshow.find('.controls'),
@@ -21,19 +22,23 @@
 
         $(window).on('load', function () {
             setTimer();
-            slideshow.on('mouseenter', function () {
+            controls.find('li').on('click', function () {
                 clearInterval(timer);
-                controls.find('li').on('click', function () {
-                    clearInterval(timer);
-                    var cId = $(this).attr('data-slide');
-                    controls.find('li').removeClass('active');
-                    $(this).addClass('active');
-                    slides.find('li').removeClass('active');
-                    slides.find('#' + cId).addClass('active');
-                });
-            }).on('mouseleave', function () {
-                setTimer();
+                var cId = $(this).attr('data-slide');
+                controls.find('li').removeClass('active');
+                $(this).addClass('active');
+                slides.find('li').removeClass('active');
+                slides.find('#' + cId).addClass('active');
             });
+
+            if (settings.pause !== false) {
+                $(settings.pause).on('mouseenter', function () {
+                    clearInterval(timer);
+                }).on('mouseleave', function () {
+                    setTimer();
+                });
+            }
+
         });
 
         function setTimer() {

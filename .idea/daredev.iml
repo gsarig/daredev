@@ -4,23 +4,5 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="PHP">
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../../../wp-admin" />
-          <root url="file://$MODULE_DIR$/../advanced-custom-fields-pro" />
-          <root url="file://$MODULE_DIR$/../contact-form-7" />
-          <root url="file://$MODULE_DIR$/../slash-admin" />
-          <root url="file://$MODULE_DIR$/../../../wp-includes" />
-        </CLASSES>
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/../../../wp-admin" />
-          <root url="file://$MODULE_DIR$/../advanced-custom-fields-pro" />
-          <root url="file://$MODULE_DIR$/../contact-form-7" />
-          <root url="file://$MODULE_DIR$/../slash-admin" />
-          <root url="file://$MODULE_DIR$/../../../wp-includes" />
-        </SOURCES>
-      </library>
-    </orderEntry>
   </component>
 </module>

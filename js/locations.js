@@ -12,11 +12,13 @@ var mapId = mapData.mapId,
     lng = getLng.constructor === Array ? getLng : Array(getLng),
     colors = mapData.colors;
 
+var isDraggable = !('ontouchstart' in document.documentElement); // If on touch device, disable drag map
 var map = new google.maps.Map(document.getElementById(mapId), {
     zoom: 14,
     center: new google.maps.LatLng(-37.92, 151.25),
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     mapTypeControl: false,
+    draggable: isDraggable,
     scrollwheel: false,
     streetViewControl: false,
     panControl: false,
