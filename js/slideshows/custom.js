@@ -29,6 +29,7 @@
                 $(this).addClass('active');
                 slides.find('li').removeClass('active');
                 slides.find('#' + cId).addClass('active');
+                setTimer();
             });
 
             if (settings.pause !== false) {
