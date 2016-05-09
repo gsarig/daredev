@@ -134,7 +134,7 @@ class Element {
             foreach ( $array as $key => $value ) {
                 $url = is_array( $value ) ? $value[0] : $value;
                 $txt = is_array( $value ) ? '<span>' . $value[1] . '</span>' : '';
-                $sites .= ( $value ) ?
+                $sites .= ( $url ) ?
                     '<li class="' . $key . '">
                                 <a href="' . $url . '" target="_blank">
                                     <i class="icon icon-' . $key . '">' . $txt . '</i>
