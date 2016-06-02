@@ -12,11 +12,18 @@
       <paths name="DareDev">
         <serverdata>
           <mappings>
-            <mapping deploy="/fiftyeggz/uprent.gr/wp-content/plugins/daredev" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/fiftyeggz/delatolas.com/wp-content/plugins/daredev" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
       <paths name="Hetzner">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Slidr">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
