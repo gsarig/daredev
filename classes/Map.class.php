@@ -30,16 +30,16 @@ class Map {
 	public $zoom;
 	public $api;
 
-	public function __construct( 
-		$postType = 'post', 
-		$dataField = null, 
-		$mapId = 'map', 
-		$moreTxt = 'Read more', 
-		$mapIcon = null, 
-		$colors = null, 
-		$single = false, 
-		$zoom = 14, 
-		$api = 'AIzaSyBJ5fUsd6a6pRHFNgNeA0Xue_Qny8HUZyM' 
+	public function __construct(
+		$postType = 'post',
+		$dataField = null,
+		$mapId = 'map',
+		$moreTxt = 'Read more',
+		$mapIcon = null,
+		$colors = null,
+		$single = false,
+		$zoom = 14,
+		$api = 'AIzaSyBJ5fUsd6a6pRHFNgNeA0Xue_Qny8HUZyM'
 	) {
 		$this->postType  = $postType;
 		$this->dataField = $dataField;
@@ -49,7 +49,7 @@ class Map {
 		$this->colors    = $colors;
 		$this->single    = $single;
 		$this->zoom      = $zoom;
-		$this->api       = isset($api) ? 'key=' . $api : '';
+		$this->api       = isset( $api ) ? 'key=' . $api : '';
 
 		if ( is_array( $this->postType ) ) {
 			$this->items = $this->postType;
