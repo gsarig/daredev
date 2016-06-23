@@ -10,6 +10,9 @@
           <option name="port" value="22" />
         </fileTransfer>
       </webServer>
+      <webServer id="725cfdc4-8d20-4224-94b4-3a1813caca6c" name="creativeeconomyingreece.com" url="http://localhost">
+        <fileTransfer port="0" mountedRoot="C:\xampp7\htdocs\creativeconomyingreece.com\wp-content\plugins\daredev" accessType="MOUNT" />
+      </webServer>
     </option>
   </component>
 </project>

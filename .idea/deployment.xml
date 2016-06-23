@@ -37,6 +37,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="creativeeconomyingreece.com">
+        <serverdata>
+          <mappings>
+            <mapping deploy="\" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
     </serverData>
   </component>
 </project>
