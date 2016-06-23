@@ -52,7 +52,7 @@ class Effects {
 	/*
 	 * Enqueue script
 	 */
-	private function enqueueScripts( $script, $jquery = true ) {
+	public function enqueueScripts( $script, $jquery = true ) {
 		$jq  = ( $jquery === true ) ? 'jquery' : '';
 		$dot = ( $jquery === true ) ? '.' : '';
 		wp_enqueue_script( 'daredev-' . $script, plugin_dir_url( __DIR__ ) . 'js/effects/' . $script . $dot . $jq . '.js', array( $jq ), PLUGIN_VERSION, true );
