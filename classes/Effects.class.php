@@ -40,7 +40,7 @@ class Effects {
 		$oc           = ( $title || $excerpt ) ? '<div class="daredev-page-title-container container">' : '';
 		$cc           = ( $title || $excerpt ) ? '</div>' : '';
 
-		$output = '<div class="daredev-parallax-wrapper" style="background-image: url(' . $imageurl . '); background-position: center 0px;" data-bgspeed="' . $speed . '">
+		$output = '<div class="daredev-parallax-wrapper" style="background-image: url(' . $imageurl . '); background-size: cover; background-position: center 0px;" data-bgspeed="' . $speed . '">
 			<div class="daredev-page-title-overlay"></div>
 				' . $oc . $show_title . $show_excerpt . $cc . '
 			</div>
