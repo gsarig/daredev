@@ -9,21 +9,7 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="DareDev">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/fiftyeggz/delatolas.com/wp-content/plugins/daredev" local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
       <paths name="Hetzner">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="Slidr">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
@@ -37,10 +23,24 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="c-j-hadjipateras.com">
+        <serverdata>
+          <mappings>
+            <mapping deploy="\" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="creativeeconomyingreece.com">
         <serverdata>
           <mappings>
             <mapping deploy="\" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="delatolas.com">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/fiftyeggz/delatolas.com/wp-content/plugins/daredev" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
