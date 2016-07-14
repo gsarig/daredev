@@ -16,6 +16,9 @@
       <webServer id="e0f82cc1-03d5-4a02-83fb-00033ca25e2c" name="c-j-hadjipateras.com" url="http://localhost">
         <fileTransfer port="0" mountedRoot="C:\xampp7\htdocs\c-j-hadjipateras.com\wp-content\plugins\daredev" accessType="MOUNT" />
       </webServer>
+      <webServer id="90519b62-f79b-4814-9d75-952bada54248" name="whatathens.gr" url="http://localhost">
+        <fileTransfer port="0" mountedRoot="C:\xampp7\htdocs\whathens\wp-content\plugins\daredev" accessType="MOUNT" />
+      </webServer>
     </option>
   </component>
 </project>

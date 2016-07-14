@@ -44,6 +44,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="whatathens.gr">
+        <serverdata>
+          <mappings>
+            <mapping deploy="\" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
     </serverData>
   </component>
 </project>
