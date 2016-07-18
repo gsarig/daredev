@@ -4,6 +4,21 @@ namespace DareDev;
 
 class Element {
 
+	public static function table( $table_id ) {
+		// get the post-table pair json data
+		$table_json = get_option( 'tablepress_tables' );
+		// json decode to array
+		$json_dec = json_decode( $table_json, true );
+		// get the pair data
+		$post_table = $json_dec['table_post'];
+		// flip the key/value of the array
+		$flip = array_flip( $post_table );
+		// you get the table id from postID by $flip[$post_obj->ID]
+		$shortcode = '[table id=' . $flip[ $table_id ] . ' /]';
+
+		return do_shortcode( $shortcode );
+	}
+
 	public static function content( $post_id, $post_field = 'post_content' ) {
 
 		if ( $post_id === 'home' ) {
