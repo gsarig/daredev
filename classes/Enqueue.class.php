@@ -21,7 +21,7 @@ class Enqueue {
 					'daredev-helper-' . $script,
 					plugin_dir_url( __DIR__ ) . 'js/helpers/' . $script . $ext . '.js',
 					$dep,
-					PLUGIN_VERSION,
+					DAREDEV_VERSION,
 					true
 				);
 			endif;

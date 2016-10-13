@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="4fab4a85-4f67-4862-b2a4-34efdc45c596" name="delatolas.com" url="http://138.201.91.199">
-        <fileTransfer host="138.201.91.199" port="22" privateKey="C:\Users\George\Dropbox\My Projects\eseseits\key_open" rootFolder="/var/www/php" accessType="SFTP" passphrase="dfdadfcbdfc4dfcbdfdedfc2df9bdfc4dfcbdf9bdfc1df9adfd9" username="root" keyPair="true">
+        <fileTransfer host="138.201.91.199" port="22" privateKey="C:\Users\George\Dropbox\My Projects\eseseits\key_open" rootFolder="/var/www/php" accessType="SFTP" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>
@@ -18,6 +18,17 @@
       </webServer>
       <webServer id="90519b62-f79b-4814-9d75-952bada54248" name="whatathens.gr" url="http://localhost">
         <fileTransfer port="0" mountedRoot="C:\xampp7\htdocs\whathens\wp-content\plugins\daredev" accessType="MOUNT" />
+      </webServer>
+      <webServer id="974b0a45-f1db-4893-a77f-ed8ea21a1a83" name="oikonomologos.gr (Local)" url="http://localhost">
+        <fileTransfer port="0" mountedRoot="C:\xampp7\htdocs\oikonomologos.gr\wp-content\plugins\daredev" accessType="MOUNT" />
+      </webServer>
+      <webServer id="0f55017e-8598-4598-bcb8-a9c04a38c07e" name="oikonomologos.gr" url="http://138.201.91.199">
+        <fileTransfer host="138.201.91.199" port="22" privateKey="C:\Users\George\Dropbox\My Projects\eseseits\key_open" rootFolder="/var/www/php/indie/oikonomologos.gr" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
       </webServer>
     </option>
   </component>

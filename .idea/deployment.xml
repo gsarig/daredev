@@ -2,13 +2,6 @@
 <project version="4">
   <component name="PublishConfigData">
     <serverData>
-      <paths name="78.47.29.83">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
       <paths name="Hetzner">
         <serverdata>
           <mappings>
@@ -41,6 +34,20 @@
         <serverdata>
           <mappings>
             <mapping deploy="/fiftyeggz/delatolas.com/wp-content/plugins/daredev" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="oikonomologos.gr">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/wp-content/plugins/daredev" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="oikonomologos.gr (Local)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="\" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

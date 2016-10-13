@@ -77,7 +77,7 @@ class Map {
 	 */
 	public function enqueueScripts() {
 		wp_register_script( 'daredev-locations-api', 'https://maps.googleapis.com/maps/api/js?' . $this->api . '&libraries=places', true );
-		wp_register_script( 'daredev-locations', plugin_dir_url( __DIR__ ) . 'js/locations.js', array( 'daredev-locations-api' ), PLUGIN_VERSION, true );
+		wp_register_script( 'daredev-locations', plugin_dir_url( __DIR__ ) . 'js/locations.js', array( 'daredev-locations-api' ), DAREDEV_VERSION, true );
 		wp_enqueue_script( [
 			'daredev-locations-api',
 			'daredev-locations'

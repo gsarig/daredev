@@ -111,11 +111,11 @@ class Slideshow {
 		$path_css = plugin_dir_url( __DIR__ ) . $file_css;
 
 		if ( file_exists( plugin_dir_path( __DIR__ ) . $file_js ) ) {
-			wp_register_script( $handle, $path_js, $this->deps, PLUGIN_VERSION, true );
+			wp_register_script( $handle, $path_js, $this->deps, DAREDEV_VERSION, true );
 			wp_enqueue_script( $handle );
 		}
 		if ( file_exists( plugin_dir_path( __DIR__ ) . $file_css ) ) {
-			wp_enqueue_style( $handle, $path_css, false, PLUGIN_VERSION );
+			wp_enqueue_style( $handle, $path_css, false, DAREDEV_VERSION );
 		}
 	}
 }

@@ -7,7 +7,7 @@ Version: 1.0
 Author URI: http://www.gsarigiannidis.gr
 */
 
-define ( 'PLUGIN_VERSION', '1.0' );
+define ( 'DAREDEV_VERSION', '1.0' );
 
 // Localize it
 load_plugin_textdomain('daredev', false, basename( dirname( __FILE__ ) ) . '/languages' ); 
