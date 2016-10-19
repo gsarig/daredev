@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="4fab4a85-4f67-4862-b2a4-34efdc45c596" name="delatolas.com" url="http://138.201.91.199">
+      <webServer id="4fab4a85-4f67-4862-b2a4-34efdc45c596" name="delatolascourier.com" url="http://138.201.91.199">
         <fileTransfer host="138.201.91.199" port="22" privateKey="C:\Users\George\Dropbox\My Projects\eseseits\key_open" rootFolder="/var/www/php" accessType="SFTP" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />

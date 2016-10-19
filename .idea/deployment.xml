@@ -30,10 +30,10 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="delatolas.com">
+      <paths name="delatolascourier.com">
         <serverdata>
           <mappings>
-            <mapping deploy="/fiftyeggz/delatolas.com/wp-content/plugins/daredev" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/fiftyeggz/delatolascourier.gr/wp-content/plugins/daredev" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
