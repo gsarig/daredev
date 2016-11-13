@@ -5,7 +5,8 @@ var mapId = mapData.mapId,
     theZoom = mapData.zoom,
     title = mapData.title,
     getDesc = mapData.desc,
-    icon = mapData.icon,
+    getIcon = mapData.icon,
+    icon = getIcon.constructor === Array ? Array.prototype.concat.apply([], mapData.icon) : mapData.icon,
     getImg = mapData.img,
     getMore = mapData.more,
     lat = getLat.constructor === Array ? getLat : Array(getLat),
@@ -101,7 +102,7 @@ for (var i = 0; i < lat.length; i++) {
     var marker = new google.maps.Marker({
         position: new google.maps.LatLng(lat[i], lng[i]),
         map: map,
-        icon: icon
+        icon: getIcon.constructor === Array ? icon[i] : icon
     });
 
     markers.push(marker);

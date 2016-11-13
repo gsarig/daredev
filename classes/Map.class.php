@@ -25,7 +25,7 @@ class Map {
 	public $mapId;
 	public $moreTxt;
 	public $mapIcon;
-	public $colors = [ ];
+	public $colors = [];
 	public $single;
 	public $zoom;
 	public $api;
@@ -91,7 +91,7 @@ class Map {
 			'zoom'   => intval( $this->zoom ),
 			'img'    => self::getMapData( 'thumb' ),
 			'more'   => self::getMapData( 'more' ),
-			'icon'   => $this->mapIcon,
+			'icon'   => isset($this->mapIcon) ? $this->mapIcon : self::getMapData( 'icon' ),
 			'colors' => $this->colors
 		] );
 	}
@@ -128,6 +128,7 @@ class Map {
 			$excerpt = $itemId['description'];
 			$desc    = ( $excerpt ) ? $excerpt : '';
 			$img     = $itemId['image'];
+			$icon    = $itemId['icon'];
 			$more    = '';
 		} else {
 			$location = get_field( $this->dataField, $itemId );
@@ -138,6 +139,7 @@ class Map {
 			$link     = get_the_permalink( $itemId );
 			$getImg   = get_the_post_thumbnail( $itemId, 'icon' );
 			$img      = ( $itemId ) ? '<a href="' . $link . '">' . $getImg . '</a>' : $getImg;
+			$icon     = null;
 			$more     = ( $itemId ) ? '<p><a href="' . $link . '">' . $this->moreTxt . '</a></p>' : '';
 		}
 
@@ -145,9 +147,9 @@ class Map {
 			case 'title' :
 				$output[] = '<h3>' . $title . '</h3>';
 				break;
-			// case 'icon' :
-			// 	$output[] = get_template_directory_uri() . '/img/location.png';
-			// 	break;
+			case 'icon' :
+				$output[] = $icon;
+				break;
 			case 'excerpt' :
 				$output[] = $desc;
 				break;

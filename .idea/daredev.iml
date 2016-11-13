@@ -7,14 +7,14 @@
     <orderEntry type="module-library">
       <library name="PHP">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../../../wp-admin" />
-          <root url="file://$MODULE_DIR$/../advanced-custom-fields-pro" />
-          <root url="file://$MODULE_DIR$/../../../wp-includes" />
+          <root url="file://C:/xampp7/htdocs/delatolas.com/wp-admin" />
+          <root url="file://C:/xampp7/htdocs/delatolas.com/wp-content/plugins/advanced-custom-fields-pro" />
+          <root url="file://C:/xampp7/htdocs/delatolas.com/wp-includes" />
         </CLASSES>
         <SOURCES>
-          <root url="file://$MODULE_DIR$/../../../wp-admin" />
-          <root url="file://$MODULE_DIR$/../advanced-custom-fields-pro" />
-          <root url="file://$MODULE_DIR$/../../../wp-includes" />
+          <root url="file://C:/xampp7/htdocs/delatolas.com/wp-admin" />
+          <root url="file://C:/xampp7/htdocs/delatolas.com/wp-content/plugins/advanced-custom-fields-pro" />
+          <root url="file://C:/xampp7/htdocs/delatolas.com/wp-includes" />
         </SOURCES>
       </library>
     </orderEntry>
