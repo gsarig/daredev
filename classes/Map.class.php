@@ -91,7 +91,7 @@ class Map {
 			'zoom'   => intval( $this->zoom ),
 			'img'    => self::getMapData( 'thumb' ),
 			'more'   => self::getMapData( 'more' ),
-			'icon'   => isset($this->mapIcon) ? $this->mapIcon : self::getMapData( 'icon' ),
+			'icon'   => isset( $this->mapIcon ) ? $this->mapIcon : self::getMapData( 'icon' ),
 			'colors' => $this->colors
 		] );
 	}
@@ -134,10 +134,10 @@ class Map {
 			$location = get_field( $this->dataField, $itemId );
 			$lat      = $location['lat'];
 			$lng      = $location['lng'];
-			$title    = ( $itemId ) ? $this->item->post_title : get_the_title();
-			$desc     = ( $itemId && $this->item->post_excerpt ) ? $this->item->post_excerpt : '';
+			$title    = ( $itemId ) ? get_the_title( $itemId ) : get_the_title();
+			$desc     = ( $itemId && has_excerpt( $itemId ) ) ? get_the_excerpt( $itemId ) : '';
 			$link     = get_the_permalink( $itemId );
-			$getImg   = get_the_post_thumbnail( $itemId, 'icon' );
+			$getImg   = get_the_post_thumbnail( $itemId );
 			$img      = ( $itemId ) ? '<a href="' . $link . '">' . $getImg . '</a>' : $getImg;
 			$icon     = null;
 			$more     = ( $itemId ) ? '<p><a href="' . $link . '">' . $this->moreTxt . '</a></p>' : '';

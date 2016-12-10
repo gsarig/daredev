@@ -19,7 +19,7 @@ var map = new google.maps.Map(document.getElementById(mapId), {
     center: new google.maps.LatLng(-37.92, 151.25),
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     mapTypeControl: false,
-    draggable: isDraggable,
+    // draggable: isDraggable,
     scrollwheel: false,
     streetViewControl: false,
     panControl: false,
