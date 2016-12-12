@@ -102,6 +102,7 @@ for (var i = 0; i < lat.length; i++) {
     var marker = new google.maps.Marker({
         position: new google.maps.LatLng(lat[i], lng[i]),
         map: map,
+        animation: google.maps.Animation.DROP,
         icon: getIcon.constructor === Array ? icon[i] : icon
     });
 
