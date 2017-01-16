@@ -122,14 +122,13 @@ class Map {
 	public function setMapData( $val, $itemId = null ) {
 
 		if ( is_array( $this->postType ) ) {
-			$lat     = $itemId['lat'];
-			$lng     = $itemId['lng'];
-			$title   = $itemId['title'];
-			$excerpt = $itemId['description'];
-			$desc    = ( $excerpt ) ? $excerpt : '';
-			$img     = $itemId['image'];
-			$icon    = $itemId['icon'];
-			$more    = '';
+			$lat   = isset( $itemId['lat'] ) ? $itemId['lat'] : '';
+			$lng   = isset( $itemId['lng'] ) ? $itemId['lng'] : '';
+			$title = isset( $itemId['title'] ) ? $itemId['title'] : '';
+			$desc   = isset( $itemId['description'] ) ? $itemId['description'] : '';
+			$img   = isset( $itemId['image'] ) ? $itemId['image'] : '';
+			$icon  = $itemId['icon'];
+			$more  = '';
 		} else {
 			$location = get_field( $this->dataField, $itemId );
 			$lat      = $location['lat'];
