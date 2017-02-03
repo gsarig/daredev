@@ -44,7 +44,7 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="maniapartments.gr">
+      <paths name="feel-at-home.gr">
         <serverdata>
           <mappings>
             <mapping deploy="/wp-content/plugins/daredev" local="$PROJECT_DIR$" web="/" />

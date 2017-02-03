@@ -30,6 +30,14 @@
           <option name="port" value="22" />
         </fileTransfer>
       </webServer>
+      <webServer id="edb3b5d4-2b95-4340-9be0-8cc4bd842210" name="feel-at-home.gr" url="http://138.201.91.199">
+        <fileTransfer host="138.201.91.199" port="22" privateKey="C:\Users\George\Dropbox\My Projects\eseseits\key_open" rootFolder="/var/www/php/fiftyeggz/feel-at-home.gr" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

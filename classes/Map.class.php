@@ -125,9 +125,9 @@ class Map {
 			$lat   = isset( $itemId['lat'] ) ? $itemId['lat'] : '';
 			$lng   = isset( $itemId['lng'] ) ? $itemId['lng'] : '';
 			$title = isset( $itemId['title'] ) ? $itemId['title'] : '';
-			$desc   = isset( $itemId['description'] ) ? $itemId['description'] : '';
+			$desc  = isset( $itemId['description'] ) ? $itemId['description'] : '';
 			$img   = isset( $itemId['image'] ) ? $itemId['image'] : '';
-			$icon  = $itemId['icon'];
+			$icon  = isset( $itemId['icon'] ) ? $itemId['icon'] : '';
 			$more  = '';
 		} else {
 			$location = get_field( $this->dataField, $itemId );
