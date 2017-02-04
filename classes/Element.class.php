@@ -33,7 +33,7 @@ class Element {
 		return apply_filters( 'the_content', get_post_field( $field, $id ) );
 	}
 
-	public static function logo( $logo = 'logo' ) {
+	public static function logo( $src ) {
 		/*
 		 * Show the site logo
 		*/
@@ -42,11 +42,11 @@ class Element {
 		$desc = get_bloginfo( 'description' );
 		$html = '<h1 class="site-title">
                     <a href="' . $url . '" rel="home">
-                        <img src="' . get_theme_mod( $logo ) . '" alt="' . $name . ' - ' . $desc . '">
+                        <img src="' . esc_url( $src ) . '" alt="' . $name . ' - ' . $desc . '">
                     </a>
                 </h1>';
 
-		return $html;
+		return $src ? $html : '';
 	}
 
 	public static function blogTitle() {
@@ -149,7 +149,7 @@ class Element {
 		     '</form>';
 	}
 
-	public static function social( $array = [ ] ) {
+	public static function social( $array = [] ) {
 		/**
 		 * Get social media links
 		 *
