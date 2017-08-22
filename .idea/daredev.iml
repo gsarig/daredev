@@ -5,26 +5,12 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
-      <library name="PHP">
+      <library name="PHP" type="php">
         <CLASSES>
-          <root url="file://C:/xampp7/htdocs/delatolas.com/wp-admin" />
-          <root url="file://C:/xampp7/htdocs/delatolas.com/wp-content/plugins/advanced-custom-fields-pro" />
-          <root url="file://C:/xampp7/htdocs/delatolas.com/wp-includes" />
+          <root url="file://$MODULE_DIR$/../../libs" />
         </CLASSES>
         <SOURCES>
-          <root url="file://C:/xampp7/htdocs/delatolas.com/wp-admin" />
-          <root url="file://C:/xampp7/htdocs/delatolas.com/wp-content/plugins/advanced-custom-fields-pro" />
-          <root url="file://C:/xampp7/htdocs/delatolas.com/wp-includes" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="PHP Runtime" type="php">
-        <CLASSES>
-          <root url="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard" />
-        </CLASSES>
-        <SOURCES>
-          <root url="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard" />
+          <root url="file://$MODULE_DIR$/../../libs" />
         </SOURCES>
       </library>
     </orderEntry>

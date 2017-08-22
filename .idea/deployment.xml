@@ -9,6 +9,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="Fiftyeggz">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="Hetzner">
         <serverdata>
           <mappings>
@@ -51,6 +58,20 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="greeninspirationsdmc.com">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/wp-content/plugins/daredev" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="maniapartments.gr">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/wp-content/plugins/daredev" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="oikonomologos.gr">
         <serverdata>
           <mappings>
@@ -62,6 +83,13 @@
         <serverdata>
           <mappings>
             <mapping deploy="\" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="saronicfestival.com">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

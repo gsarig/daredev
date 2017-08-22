@@ -100,7 +100,7 @@ class Map {
 	 * Get Map Data
 	 */
 	public function getMapData( $val = null ) {
-		$output = '';
+		$output = [];
 		if ( $this->single === true && is_singular( $this->postType ) ) {
 			$output = self::setMapData( $val );
 		} elseif ( is_array( $this->postType ) ) {

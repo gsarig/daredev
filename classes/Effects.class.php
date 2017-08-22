@@ -16,7 +16,7 @@ class Effects {
 	public function __construct( $effect ) {
 		$this->effect = $effect;
 		self::enqueueScripts( $this->effect );
-		add_action( 'wp_footer', array( $this, 'enqueueScripts' ) );
+		add_action( 'wp_footer', array( $this->effect, 'enqueueScripts' ) );
 	}
 
 

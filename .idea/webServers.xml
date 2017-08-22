@@ -38,6 +38,22 @@
           <option name="port" value="22" />
         </fileTransfer>
       </webServer>
+      <webServer id="d2202ffd-82b4-453d-8a35-4f56890c98cd" name="maniapartments.gr" url="http://138.201.91.199">
+        <fileTransfer host="138.201.91.199" port="22" privateKey="C:\Users\George\Dropbox\My Projects\eseseits\key_open" rootFolder="/var/www/php/indie/maniapartments.gr" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="f9408c8c-1789-49b8-bbff-57c039d9d118" name="greeninspirationsdmc.com" url="http://ftp.green-inspirations.com">
+        <fileTransfer host="ftp.green-inspirations.com" port="21" rootFolder="/dev">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>
