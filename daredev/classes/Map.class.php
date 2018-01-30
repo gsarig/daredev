@@ -39,7 +39,7 @@ class Map {
 		$colors = null,
 		$single = false,
 		$zoom = 14,
-		$api = 'AIzaSyBJ5fUsd6a6pRHFNgNeA0Xue_Qny8HUZyM'
+		$api = DD_GOOGLE_MAPS_API_KEY
 	) {
 		$this->postType  = $postType;
 		$this->dataField = $dataField;
@@ -76,7 +76,7 @@ class Map {
 	 * Enqueue scripts and pass the php variables
 	 */
 	public function enqueueScripts() {
-		wp_register_script( 'daredev-locations-api', 'https://maps.googleapis.com/maps/api/js?' . $this->api . '&libraries=places', true );
+		wp_register_script( 'daredev-locations-api', 'https://maps.googleapis.com/maps/api/js?' . $this->api . '&libraries=places', '', DAREDEV_VERSION, true );
 		wp_register_script( 'daredev-locations', plugin_dir_url( __DIR__ ) . 'js/locations.js', array( 'daredev-locations-api' ), DAREDEV_VERSION, true );
 		wp_enqueue_script( [
 			'daredev-locations-api',

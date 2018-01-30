@@ -54,6 +54,14 @@
           <option name="port" value="21" />
         </fileTransfer>
       </webServer>
+      <webServer id="3d4de525-806c-4d8f-af0c-19827346f62f" name="coronadifiori.gr" url="http://138.201.91.199">
+        <fileTransfer host="138.201.91.199" port="22" privateKey="C:\Users\sarig\Dropbox\My Projects\eseseits\key_open" rootFolder="/var/www/php/indie/coronadifiori.gr" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

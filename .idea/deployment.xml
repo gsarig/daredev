@@ -37,6 +37,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="coronadifiori.gr">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/wp-content/plugins/daredev" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="creativeeconomyingreece.com">
         <serverdata>
           <mappings>
@@ -72,6 +79,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="mapfre-asistencia.gr">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="oikonomologos.gr">
         <serverdata>
           <mappings>
@@ -83,6 +97,13 @@
         <serverdata>
           <mappings>
             <mapping deploy="\" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="reasonto.gr">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
