@@ -9,16 +9,18 @@
  * @link https://www.advancedcustomfields.com/resources/acf_add_options_page/
  */
 
-if ( function_exists( 'acf_add_options_page' ) ) {
-	acf_add_options_page( array(
-		'page_title' => __( 'Ρυθμίσεις Site', 'daredev' ),
-		'menu_title' => __( 'Ρυθμίσεις Site', 'daredev' ),
-		'menu_slug'  => 'site-options',
-		'capability' => 'edit_posts',
-		'redirect'   => false
-	) );
+function acf_add_options_page_init() {
+	if ( function_exists( 'acf_add_options_page' ) ) {
+		acf_add_options_page( array(
+			'page_title' => __( 'Ρυθμίσεις Site', 'daredev' ),
+			'menu_title' => __( 'Ρυθμίσεις Site', 'daredev' ),
+			'menu_slug'  => 'site-options',
+			'capability' => 'edit_posts',
+			'redirect'   => false
+		) );
+	}
 }
-
+add_action('init', 'acf_add_options_page_init');
 /**
  * ACF - Register Google Maps API
  * Get your API Key here: https://developers.google.com/maps/documentation/javascript/get-api-key
