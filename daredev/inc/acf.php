@@ -119,5 +119,18 @@ function acf_date_range( $from, $to = '', $separator = '-', $markup = '' )
 	return $markup ? str_replace( '><', '>' . $output . '<', $markup ) : $output;
 }
 
+/**
+ * Link Wrapper
+ * If URL exists, returns a link, else returns only the anchor
+ * @param        $url
+ * @param        $anchor
+ * @param string $extras
+ * @return string
+ */
+function acf_link_wrapper( $url, $anchor, $extras = '' )
+{
+	return $url ? '<a href="' . esc_url( $url ) . '" ' . $extras . '>' . $anchor . '</a>' : $anchor;
+}
+
 // Hide ACF
 //add_filter( 'acf/settings/show_admin', '__return_false' );
