@@ -27,6 +27,7 @@ class Map {
 	public $mapIcon;
 	public $colors = [];
 	public $single;
+	public $cluster;
 	public $zoom;
 	public $api;
 
@@ -38,18 +39,22 @@ class Map {
 		$mapIcon = null,
 		$colors = null,
 		$single = false,
+		$cluster = false,
+		$directions = false,
 		$zoom = 14,
 		$api = DD_GOOGLE_MAPS_API_KEY
 	) {
-		$this->postType  = $postType;
-		$this->dataField = $dataField;
-		$this->mapId     = $mapId;
-		$this->moreTxt   = $moreTxt;
-		$this->mapIcon   = $mapIcon;
-		$this->colors    = $colors;
-		$this->single    = $single;
-		$this->zoom      = $zoom;
-		$this->api       = isset( $api ) ? 'key=' . $api : '';
+		$this->postType   = $postType;
+		$this->dataField  = $dataField;
+		$this->mapId      = $mapId;
+		$this->moreTxt    = $moreTxt;
+		$this->mapIcon    = $mapIcon;
+		$this->colors     = $colors;
+		$this->single     = $single;
+		$this->cluster    = $cluster;
+		$this->directions = $directions;
+		$this->zoom       = $zoom;
+		$this->api        = isset( $api ) ? 'key=' . $api : '';
 
 		if ( is_array( $this->postType ) ) {
 			$this->items = $this->postType;
@@ -66,7 +71,12 @@ class Map {
 	/*
 	 * Show the map.
 	 */
-	public function show( $mapClass = 'map', $width = '100%', $height = '500px' ) {
+	public
+	function show(
+		$mapClass = 'map',
+		$width = '100%',
+		$height = '500px'
+	) {
 		add_action( 'wp_footer', array( $this, 'enqueueScripts' ) );
 
 		return '<div class="' . $mapClass . '" id="' . $this->mapId . '" style="width:' . $width . '; height: ' . $height . ';"></div>';
@@ -75,31 +85,82 @@ class Map {
 	/*
 	 * Enqueue scripts and pass the php variables
 	 */
-	public function enqueueScripts() {
-		wp_register_script( 'daredev-locations-api', 'https://maps.googleapis.com/maps/api/js?' . $this->api . '&libraries=places', '', DAREDEV_VERSION, true );
-		wp_register_script( 'daredev-locations', WPMU_PLUGIN_URL . '/daredev/js/locations.js', array( 'daredev-locations-api' ), DAREDEV_VERSION, true );
+	public
+	function enqueueScripts() {
+		if ( $this->cluster ) {
+			wp_register_script( 'daredev-gmaps-clusters-api',
+				'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js',
+				'', DAREDEV_VERSION, true );
+			wp_register_script( 'daredev-infobox', WPMU_PLUGIN_URL . '/daredev/js/infobox.js',
+				array( 'daredev-locations-api' ), DAREDEV_VERSION, true );
+			wp_register_script( 'daredev-locations', WPMU_PLUGIN_URL . '/daredev/js/cluster.js',
+				array( 'daredev-locations-api', 'daredev-gmaps-clusters-api', 'daredev-infobox' ), DAREDEV_VERSION,
+				true );
+		} else {
+			wp_register_script( 'daredev-locations', WPMU_PLUGIN_URL . '/daredev/js/locations.js',
+				array( 'daredev-locations-api' ), DAREDEV_VERSION, true );
+		}
+		if ( $this->directions ) {
+			wp_register_script( 'daredev-autocomplete', WPMU_PLUGIN_URL . '/daredev/js/autocomplete.js',
+				array( 'daredev-locations-api' ), DAREDEV_VERSION, true );
+		}
+		wp_register_script( 'daredev-locations-api',
+			'https://maps.googleapis.com/maps/api/js?' . $this->api . '&libraries=places', '', DAREDEV_VERSION, true );
 		wp_enqueue_script( [
 			'daredev-locations-api',
-			'daredev-locations'
+			'daredev-locations',
+			'daredev-cluster',
+			'daredev-autocomplete',
+			'daredev-gmaps-clusters-api'
 		] );
 		wp_localize_script( 'daredev-locations', 'mapData', [
-			'mapId'  => $this->mapId,
-			'title'  => self::getMapData( 'title' ),
-			'desc'   => self::getMapData( 'excerpt' ),
-			'lat'    => self::getMapData( 'lat' ),
-			'lng'    => self::getMapData( 'lng' ),
-			'zoom'   => intval( $this->zoom ),
-			'img'    => self::getMapData( 'thumb' ),
-			'more'   => self::getMapData( 'more' ),
-			'icon'   => isset( $this->mapIcon ) ? $this->mapIcon : self::getMapData( 'icon' ),
-			'colors' => $this->colors
+			'mapId'    => $this->mapId,
+			'title'    => self::getMapData( 'title' ),
+			'desc'     => self::getMapData( 'excerpt' ),
+			'lat'      => self::getMapData( 'lat' ),
+			'lng'      => self::getMapData( 'lng' ),
+			'zoom'     => intval( $this->zoom ),
+			'img'      => self::getMapData( 'thumb' ),
+			'more'     => self::getMapData( 'more' ),
+			'icon'     => isset( $this->mapIcon ) ? $this->mapIcon : self::getMapData( 'icon' ),
+			'colors'   => $this->colors,
+			'themeUrl' => get_stylesheet_directory_uri(),
 		] );
+	}
+
+	/**
+	 * Get directions search field and link.
+	 *
+	 * @param array $origin
+	 * @param string $anchor
+	 * @param string $link_params
+	 *
+	 * @return string
+	 */
+	public function directions(
+		$origin = '',
+		$anchor = 'Get directions',
+		$placeholder = 'Search location',
+		$link_params = 'target="_blank"'
+	) {
+		$output = '';
+		if ( $origin ) {
+			$output = '<div class="ddDirectionsContainer">
+					<input id="dd-places-autocomplete" class="controls" type="text" placeholder="' . $placeholder . '">
+					<a id="ddDirectionsLink" data-origin="' . $origin . '" href="#" ' . $link_params . '>' . $anchor . '</a>
+				</div>';
+		}
+
+		return $output;
 	}
 
 	/*
 	 * Get Map Data
 	 */
-	public function getMapData( $val = null ) {
+	public
+	function getMapData(
+		$val = null
+	) {
 		$output = [];
 		if ( $this->single === true && is_singular( $this->postType ) ) {
 			$output = self::setMapData( $val );
@@ -119,7 +180,11 @@ class Map {
 	/*
 	 * Set Map Data
 	 */
-	public function setMapData( $val, $itemId = null ) {
+	public
+	function setMapData(
+		$val,
+		$itemId = null
+	) {
 
 		if ( is_array( $this->postType ) ) {
 			$lat   = isset( $itemId['lat'] ) ? $itemId['lat'] : '';
