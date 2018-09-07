@@ -3,68 +3,30 @@
  * Custom Post Types
  */
 
+/*
 
-$hotel = new \DareDev\PostType(
-	'hotel', [
+// Sample post type
+
+$post_type = new \DareDev\PostType(
+	'post_type', [
 	'has_archive' => true,
 	'supports'    => [ 'title', 'editor', 'excerpt', 'thumbnail', 'revisions' ]
 ], [
-	'singular_name' => __( 'Hotel', 'daredev' ),
-	'plural_name'   => __( 'Hotels', 'daredev' ),
-], 'hotels'
+	'singular_name' => __( 'Post Type', 'daredev' ),
+	'plural_name'   => __( 'Post Types', 'daredev' ),
+], 'post_types'
 );
+*/
 
-$event = new \DareDev\PostType(
-	'event', [
-	'has_archive' => true,
-	'supports'    => [ 'title', 'editor', 'excerpt', 'thumbnail', 'revisions' ]
+/*
+// Sample taxonomy
+$custom_taxonomy = new \DareDev\Taxonomy(
+	'custom_taxonomy', [
+	'post',
+	'post_type',
 ], [
-	'singular_name' => __( 'Event', 'daredev' ),
-	'plural_name'   => __( 'Events', 'daredev' ),
-], 'events'
+	'singular_name' => 'Custom Taxonomy',
+	'plural_name'   => 'Custom Taxonomies'
+], 'custom_taxonomies', false, true
 );
-$offer = new \DareDev\PostType(
-	'offer', [
-	'has_archive' => true,
-	'supports'    => [ 'title', 'editor', 'excerpt', 'thumbnail', 'revisions' ]
-], [
-	'singular_name' => __( 'Offer', 'daredev' ),
-	'plural_name'   => __( 'Offers', 'daredev' ),
-], 'offers'
-);
-
-// Taxonomies
-$location = new \DareDev\Taxonomy(
-	'location', [
-	'hotel',
-	'event',
-	'offer'
-], [
-	'singular_name' => 'Location',
-	'plural_name'   => 'Locations'
-], 'destinations', false, true
-);
-$style    = new \DareDev\Taxonomy(
-	'style', [
-	'hotel'
-], [
-	'singular_name' => 'Style',
-	'plural_name'   => 'Styles'
-], 'style', false, true
-);
-$loc_type = new \DareDev\Taxonomy(
-	'loc_type', [
-	'hotel'
-], [
-	'singular_name' => 'Location type',
-	'plural_name'   => 'Location types'
-], 'loc_type', false, true
-);
-$amenity  = new \DareDev\Taxonomy(
-	'amenity', [
-	'hotel'
-], [
-	'singular_name' => 'Amenity',
-	'plural_name'   => 'Amenities'
-], 'amenity', false, true
-);
+*/
