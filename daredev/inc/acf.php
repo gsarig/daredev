@@ -145,4 +145,6 @@ function acf_pluralize( $text, $number, $lang = 'en' ) {
 }
 
 // Hide ACF
-//add_filter( 'acf/settings/show_admin', '__return_false' );
+if ( WP_DEBUG !== true ) {
+	add_filter( 'acf/settings/show_admin', '__return_false' );
+}
