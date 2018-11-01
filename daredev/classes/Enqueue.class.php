@@ -1,22 +1,40 @@
 <?php
-/**
- * Batch enqueue scripts
- * Use it like this:
- * \DareDev\Enqueue::scripts(['scriptName1', 'scriptName2']);
- */
 
 namespace DareDev;
 
 
 class Enqueue {
 
-	public static function scripts($scripts = []) {
-		$path = plugin_dir_path(__DIR__) . 'js/helpers/';
-		foreach($scripts as $script) :
-			$ext = ( file_exists($path . $script . '.jquery.js') ) ? '.jquery' : '';
-			$dep = ( file_exists($path . $script . '.jquery.js') ) ? ['jquery'] : '';
+	/**
+	 * Enqueue Google Fonts.
+	 * Use it like that:
+	 *    DareDev\Enqueue::googleFonts( [ 'Open+Sans:400,600,700' ] );
+	 *
+	 * @param array $fonts
+	 */
+	public static function googleFonts( $fonts = [] ) {
+		wp_enqueue_script(
+			'daredev-google-fonts', WPMU_PLUGIN_URL . '/daredev/js/google-fonts-async.js', [], DAREDEV_VERSION, true
+		);
+		wp_localize_script(
+			'daredev-google-fonts', 'data', [
+				'fonts' => $fonts
+			]
+		);
+	}
 
-			if( file_exists($path . $script . '.jquery.js') || file_exists($path . $script . '.js') ) :
+	/**
+	 * Batch enqueue scripts
+	 * Use it like this:
+	 * \DareDev\Enqueue::scripts(['scriptName1', 'scriptName2']);
+	 */
+	public static function scripts( $scripts = [] ) {
+		$path = plugin_dir_path( __DIR__ ) . 'js/helpers/';
+		foreach ( $scripts as $script ) :
+			$ext = ( file_exists( $path . $script . '.jquery.js' ) ) ? '.jquery' : '';
+			$dep = ( file_exists( $path . $script . '.jquery.js' ) ) ? [ 'jquery' ] : '';
+
+			if ( file_exists( $path . $script . '.jquery.js' ) || file_exists( $path . $script . '.js' ) ) :
 				wp_enqueue_script(
 					'daredev-helper-' . $script,
 					plugin_dir_url( __DIR__ ) . 'js/helpers/' . $script . $ext . '.js',
