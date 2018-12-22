@@ -17,7 +17,7 @@ function acf_add_options_page_init() {
 				'menu_title' => __( 'Site Settings', 'daredev' ),
 				'menu_slug'  => 'site-options',
 				'capability' => 'edit_posts',
-				'redirect'   => false
+				'redirect'   => false,
 			]
 		);
 	}
@@ -44,15 +44,14 @@ add_action( 'acf/init', 'my_acf_init' );
  *
  * @return string
  */
-function acf_link( $link_obj, $class = '' ) {
+function acf_link( $link_obj, $class = '', $text_before = '', $text_after = '' ) {
 	$url         = $link_obj ? $link_obj['url'] : '';
 	$title       = $link_obj ? $link_obj['title'] : '';
 	$target      = $link_obj ? $link_obj['target'] : '';
 	$show_target = $target ? ' target="' . $target . '"' : '';
 	$show_class  = $class ? ' class="' . $class . '"' : '';
-	$protocol    = ( ! preg_match( '~^(?:f|ht)tps?://~i', $url ) ) ? 'http://' : '';
 
-	return ( $url && $title ) ? '<a href="' . $protocol . $url . '" ' . $show_target . $show_class . '>' . $title .
+	return ( $url && $title ) ? '<a href="' . $url . '" ' . $show_target . $show_class . '>' . $text_before . $title . $text_after .
 	                            '</a>' : '';
 }
 

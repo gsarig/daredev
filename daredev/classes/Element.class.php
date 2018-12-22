@@ -33,6 +33,46 @@ class Element {
 		return apply_filters( 'the_content', get_post_field( $field, $id ) );
 	}
 
+	/**
+	 * Takes the input $content and returns it based in your corrections
+	 * Call example with description on the result
+	 * $mytest_content = content_filtered =( array(
+	 * 'find' => 'replace',
+	 * 'find2'=> array('replace2',1, $int)
+	 * ) , null , true);
+	 * we care about the array so for the first $key => $value
+	 * this function will perform a str_replace($key,$value,get_the_content())
+	 * but for the second $key => $value the function will preform a preg_replace like so
+	 * preg_replace ($key , '/'.preg_quote($value[0],'/').'/',$value[1],$value[2])
+	 * value[1] is the number of replacements to be made and $value[2] if set will return an int
+	 * of the changes actually made
+	 *
+	 * @param array $replace
+	 * @param string $content
+	 * @param boolean $filter
+	 *
+	 * @return string
+	 */
+	public static function content_filtered( $replace = [], $content = null, $filter = true ) {
+		$data = $content ? $content : get_the_content();
+		if ( $replace ) {
+			foreach ( $replace as $needle => $replacement ) {
+				if ( 'array' === gettype( $replacement ) ) {
+					$needle = '/' . preg_quote( $needle, '/' ) . '/';
+					$extra  = ( count( $replacement ) > 2 ) ? $replacement[2] : '';
+					$data   = preg_replace( $needle, $replacement[0], $data, $replacement[1], $extra );
+				} else {
+					$data = str_replace( $needle, $replacement, $data );
+				}
+			}
+			$output = $data;
+		} else {
+			$output = $data;
+		}
+
+		return $filter ? apply_filters( 'the_content', $output ) : $output;
+	}
+
 	public static function logo( $src ) {
 		/*
 		 * Show the site logo
@@ -161,8 +201,8 @@ class Element {
 		if ( $array ) {
 			$sites = '';
 			foreach ( $array as $key => $value ) {
-				$url = is_array( $value ) ? $value[0] : $value;
-				$txt = is_array( $value ) ? '<span>' . $value[1] . '</span>' : '';
+				$url   = is_array( $value ) ? $value[0] : $value;
+				$txt   = is_array( $value ) ? '<span>' . $value[1] . '</span>' : '';
 				$sites .= ( $url ) ?
 					'<li class="' . $key . '">
                                 <a href="' . $url . '" target="_blank">

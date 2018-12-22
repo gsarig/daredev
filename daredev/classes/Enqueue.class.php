@@ -8,7 +8,7 @@ class Enqueue {
 	/**
 	 * Enqueue Google Fonts.
 	 * Use it like that:
-	 *    DareDev\Enqueue::googleFonts( [ 'Open+Sans:400,600,700' ] );
+	 *    DareDev\Enqueue::googleFonts( [ 'Jura:300,400,500,700:greek','Roboto:300,400,900:greek', ] );
 	 *
 	 * @param array $fonts
 	 */
