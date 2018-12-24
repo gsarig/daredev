@@ -30,7 +30,7 @@ class Helper {
 	 *
 	 * @return array
 	 */
-	public function kses_allow_html() {
+	public static function kses_allow_html() {
 		return [
 			'div'    => [
 				'class'    => true,
@@ -88,6 +88,12 @@ class Helper {
 			'label'  => [
 				'for'   => true,
 				'class' => true,
+			],
+			'a'      => [
+				'href'   => true,
+				'target' => true,
+				'id'     => true,
+				'class'  => true,
 			],
 		];
 	}
