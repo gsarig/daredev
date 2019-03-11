@@ -90,9 +90,9 @@ function acf_textarea( $data, $elements = [] ) {
  *
  * @return mixed|string
  */
-function acf_date_range( $from, $to = '', $separator = '-', $markup = '' ) {
-	$get_from       = $from ? DateTime::createFromFormat( 'd/m/Y g:i a', $from ) : '';
-	$get_to         = $to ? DateTime::createFromFormat( 'd/m/Y g:i a', $to ) : '';
+function acf_date_range( $from, $to = '', $separator = '-', $markup = '', $date_format = 'd/m/Y g:i a' ) {
+	$get_from       = $from ? DateTime::createFromFormat( $date_format, $from ) : '';
+	$get_to         = $to ? DateTime::createFromFormat( $date_format, $to ) : '';
 	$timestamp_from = $from ? $get_from->getTimestamp() : '';
 	$timestamp_to   = $to ? $get_to->getTimestamp() : '';
 	$fd             = date( 'j', $timestamp_from );
