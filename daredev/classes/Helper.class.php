@@ -11,14 +11,14 @@ class Helper {
 	 *
 	 * @return string
 	 */
-	function page_template_id( $page_template_name ) {
+	function page_template_id( $page_template_name, $post_type = 'page', $path = 'page-templates/' ) {
 		$args    = [
-			'post_type'    => 'page',
+			'post_type'    => $post_type,
 			'fields'       => 'ids',
 			'nopaging'     => true,
 			'hierarchical' => 0,
 			'meta_key'     => '_wp_page_template',
-			'meta_value'   => 'page-templates/' . $page_template_name . '.php',
+			'meta_value'   => $path . $page_template_name . '.php',
 		];
 		$entries = get_posts( $args );
 
