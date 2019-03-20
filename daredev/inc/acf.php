@@ -37,6 +37,26 @@ add_action( 'acf/init', 'my_acf_init' );
 
 
 /**
+ * Handle acf-json inside the mu-plugin
+ */
+add_filter( 'acf/settings/save_json', 'dd_acf_json_save_point' );
+add_filter( 'acf/settings/load_json', 'dd_acf_json_load_point' );
+
+function dd_acf_json_save_point( $path ) {
+	$path = WPMU_PLUGIN_DIR . '/daredev/acf-json';
+
+	return $path;
+}
+
+function dd_acf_json_load_point( $paths ) {
+	unset( $paths[0] );
+	$paths[] = WPMU_PLUGIN_DIR . '/daredev/acf-json';
+
+	return $paths;
+}
+
+
+/**
  * Construct Link HTML from ACF Link field
  *
  * @param        $link_obj
