@@ -37,7 +37,7 @@ class Form {
 		$dom = new domDocument();
 
 		// Load the form's html into the object.
-		$dom->loadHTML( $form );
+		$dom->loadHTML( '<?xml encoding="utf-8" ?>' . $form );
 
 		// Discard white space.
 		$dom->preserveWhiteSpace = false;
