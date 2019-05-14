@@ -11,7 +11,7 @@ class Helper {
 	 *
 	 * @return string
 	 */
-	function page_template_id( $page_template_name, $post_type = 'page', $path = 'page-templates/' ) {
+	public static function page_template_id( $page_template_name, $post_type = 'page', $path = 'page-templates/' ) {
 		$args    = [
 			'post_type'    => $post_type,
 			'fields'       => 'ids',
