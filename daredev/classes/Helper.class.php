@@ -122,6 +122,7 @@ class Helper {
 				'usemap'   => true,
 				'width'    => true,
 			],
+			'br'     => true,
 		];
 	}
 }
