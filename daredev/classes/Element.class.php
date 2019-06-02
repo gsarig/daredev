@@ -89,6 +89,20 @@ class Element {
 		return $src ? $html : '';
 	}
 
+	public static function svg_logo() {
+		$logo    = '';
+		$logo_id = get_theme_mod( 'custom_logo' );
+		if ( $logo_id ) {
+			$logo_src = wp_get_attachment_image_src( $logo_id, 'original' );
+			$site_url = esc_url( home_url( '/' ) );
+			$logo_alt = get_bloginfo( 'name' );
+
+			$logo = '<a href="' . $site_url . '" class="logo"><img src="' . $logo_src[0] . '" alt="' . $logo_alt . '"></a>';
+		}
+
+		return $logo;
+	}
+
 	public static function blogTitle() {
 		/*
 		 * Get the blog page title (if we are in the blog page)

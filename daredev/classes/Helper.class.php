@@ -27,6 +27,7 @@ class Helper {
 
 	/**
 	 * Sanitize HTML
+	 * All options: https://core.trac.wordpress.org/browser/tags/5.2.1/src/wp-includes/kses.php#L0
 	 *
 	 * @return array
 	 */
@@ -34,44 +35,54 @@ class Helper {
 		return [
 			'div'    => [
 				'class'    => true,
+				'style'    => true,
 				'id'       => true,
 				'data-min' => true,
 				'data-max' => true,
 			],
 			'span'   => [
 				'class' => true,
+				'style' => true,
 				'id'    => true,
 			],
 			'h1'     => [
 				'class' => true,
+				'style' => true,
 				'id'    => true,
 			],
 			'h2'     => [
 				'class' => true,
+				'style' => true,
 				'id'    => true,
 			],
 			'h3'     => [
 				'class' => true,
+				'style' => true,
 				'id'    => true,
 			],
 			'h4'     => [
 				'class' => true,
+				'style' => true,
 				'id'    => true,
 			],
 			'h5'     => [
 				'class' => true,
+				'style' => true,
 				'id'    => true,
 			],
 			'h6'     => [
 				'class' => true,
+				'style' => true,
 				'id'    => true,
 			],
 			'button' => [
 				'class' => true,
+				'style' => true,
 				'id'    => true,
 			],
 			'ul'     => [
 				'class' => true,
+				'style' => true,
 				'id'    => true,
 			],
 			'li'     => [],
@@ -94,6 +105,22 @@ class Helper {
 				'target' => true,
 				'id'     => true,
 				'class'  => true,
+			],
+			'p'      => [
+				'class' => true,
+				'style' => true,
+			],
+			'img'    => [
+				'alt'      => true,
+				'align'    => true,
+				'border'   => true,
+				'height'   => true,
+				'hspace'   => true,
+				'longdesc' => true,
+				'vspace'   => true,
+				'src'      => true,
+				'usemap'   => true,
+				'width'    => true,
 			],
 		];
 	}
