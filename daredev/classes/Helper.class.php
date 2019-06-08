@@ -232,6 +232,7 @@ class Helper {
 			'i'          => [],
 			'img'        => [
 				'alt'      => true,
+				'class'    => true,
 				'align'    => true,
 				'border'   => true,
 				'height'   => true,
