@@ -10,7 +10,8 @@
 $post_type = new \DareDev\PostType(
 	'post_type', [
 	'has_archive' => true,
-	'supports'    => [ 'title', 'editor', 'excerpt', 'thumbnail', 'revisions' ]
+	'supports'    => [ 'title', 'editor', 'excerpt', 'thumbnail', 'revisions' ],
+	'show_in_rest' => true,
 ], [
 	'singular_name' => __( 'Post Type', 'daredev' ),
 	'plural_name'   => __( 'Post Types', 'daredev' ),
