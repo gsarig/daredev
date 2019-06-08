@@ -271,6 +271,8 @@ class Helper {
 				'xml:lang' => true,
 			],
 			'p'          => [
+				'class'    => true,
+				'id'       => true,
 				'align'    => true,
 				'dir'      => true,
 				'lang'     => true,
