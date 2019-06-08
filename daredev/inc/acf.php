@@ -51,6 +51,11 @@ function dd_acf_json_save_point( $path ) {
 function dd_acf_json_load_point( $paths ) {
 	unset( $paths[0] );
 	$paths[] = WPMU_PLUGIN_DIR . '/daredev/acf-json';
+	if ( DD_ACF_JSON_PATHS ) {
+		foreach ( DD_ACF_JSON_PATHS as $path ) {
+			$paths[] = WPMU_PLUGIN_DIR . '/' . $path . '/acf-json';
+		}
+	}
 
 	return $paths;
 }
@@ -163,7 +168,7 @@ function acf_pluralize( $text, $number, $lang = 'en' ) {
 	return ( $number === 1 && $lang === 'en' ) ? rtrim( $text, 's' ) : $text;
 }
 
-// Hide ACF
+// Hide ACF when debug is set to false.
 if ( WP_DEBUG !== true ) {
 	add_filter( 'acf/settings/show_admin', '__return_false' );
 }
