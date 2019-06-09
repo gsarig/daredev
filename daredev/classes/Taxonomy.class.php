@@ -5,19 +5,28 @@ namespace DareDev;
 class Taxonomy {
 
 	public $name;
-	public $cpt    = [];
+	public $cpt = [];
 	public $slug;
 	public $labels = [];
 	public $greek;
 	public $column;
+	public $rest;
 
-	public function __construct( $name, $cpt = [], $labels = [], $slug = false, $greek = false, $column = false ) {
+	public function __construct(
+		$name,
+		$cpt = [],
+		$labels = [],
+		$slug = false,
+		$greek = false,
+		$column = false,
+		$rest = false
+	) {
 		$this->name       = $name;
 		$required_labels  = [
 			'singular_name' => ucwords( $this->name ),
 			'plural_name'   => ucwords( $this->name ),
 			'singular_case' => ucwords( $this->name ),
-			'plural_case'   => ucwords( $this->name )
+			'plural_case'   => ucwords( $this->name ),
 		];
 		$this->labels     = $labels + $required_labels;
 		$this->cpt        = $cpt;
@@ -25,11 +34,13 @@ class Taxonomy {
 		$this->greek      = $greek;
 		$this->get_labels = $this->labels + $this->defaultLabels();
 		$this->column     = $column;
+		$this->rest       = $rest;
 		$this->options    = [
 			'labels'            => $this->get_labels,
 			'hierarchical'      => true,
 			'rewrite'           => [ 'slug' => ( false !== $this->slug ) ? strtolower( $this->slug ) : strtolower( $this->name ) ],
 			'show_admin_column' => $this->column,
+			'show_in_rest'      => $this->rest,
 		];
 
 		add_action( 'init', array( $this, 'register' ) );
@@ -53,7 +64,7 @@ class Taxonomy {
 				'Επεξεργασία ',
 				'Ενημέρωση ',
 				'Προσθήκη ',
-				'Νέο όνομα '
+				'Νέο όνομα ',
 			] :
 			[
 				$this->labels['singular_name'],
@@ -64,7 +75,7 @@ class Taxonomy {
 				'Edit ',
 				'Update ',
 				'Add New ',
-				'New Name for '
+				'New Name for ',
 			];
 
 		return [

@@ -273,6 +273,7 @@ class Helper {
 			],
 			'p'          => [
 				'class'    => true,
+				'style'    => true,
 				'id'       => true,
 				'align'    => true,
 				'dir'      => true,
