@@ -4,6 +4,70 @@ namespace DareDev;
 
 class Element {
 
+	/**
+	 * Share buttons
+	 *
+	 * Run it like that: echo wp_kses(
+	 * DareDev\Element::share(['facebook' => 'fb', 'twitter' => ''], 'button'),
+	 * DareDev\Helper::kses_allow_html( [ 'button', 'div', 'span', 'ul', 'li', 'a' ] )
+	 * );
+	 *
+	 * @param array $networks Example ['facebook' => 'my-icon', 'twitter' => 'my-icon'].
+	 * @param string $button Text string.
+	 * @param integer $post_id The post ID.
+	 * @param string $class Override the default class.
+	 *
+	 * @return string
+	 */
+	public static function share( $networks = [], $button = null, $post_id = null, $class = 'social-share' ) {
+		$permalink    = esc_url( get_the_permalink( $post_id ) );
+		$thumbnail    = get_the_post_thumbnail_url( $post_id, 'medium' );
+		$share_title  = get_the_title( $post_id );
+		$description  = get_the_excerpt( $post_id );
+		$btn          = $button ? $button : '<button class="share-toggle-button">Share</button>';
+		$all_networks = [
+			'facebook'  => [
+				'href'   => 'https://www.facebook.com/sharer/sharer.php?u=' . $permalink,
+				'anchor' => '<span class="anchor"><span class="text">Facebook</span></span>',
+			],
+			'twitter'   => [
+				'href'   => 'https://twitter.com/home?status=' . $share_title . ' | ' . $permalink,
+				'anchor' => '<span class="anchor"><span class="text">Twitter</span></span>',
+			],
+			'pinterest' => [
+				'href'   => 'https://pinterest.com/pin/create/button/?url=' . $permalink . '&media=' . $thumbnail . '&description=' . $description,
+				'anchor' => '<span class="anchor"><span class="text">Pinterest</span></span>',
+			],
+			'linkedin'  => [
+				'href'   => 'https://www.linkedin.com/shareArticle?mini=true&url=' . $permalink . '&title=' . $share_title . '&summary=' . $description . '&source=' . get_site_url() . '',
+				'anchor' => '<span class="anchor"><span class="text">LinkedIn</span></span>',
+			],
+			'email'     => [
+				'href'   => 'mailto:?subject=' . $share_title . '&body=' . $description . ' (' . $permalink . ')',
+				'anchor' => '<span class="anchor"><span class="text">Email</span></span>',
+			],
+		];
+		$links        = '';
+		if ( $networks ) {
+			foreach ( $networks as $name => $anchor ) {
+				$href  = $all_networks[ $name ]['href'];
+				$txt   = $anchor ? $anchor : $all_networks[ $name ]['anchor'];
+				$links .= '<li class="' . $name . '"><a href="' . $href . '" target="_blank" title="' . $name . '">' . $txt . '</a></li>';
+			}
+		} else {
+			foreach ( $all_networks as $name => $value ) {
+				$href   = $value['href'];
+				$anchor = $value['anchor'];
+				$links  .= '<li class="' . $name . '"><a href="' . $href . '" target="_blank" title="' . $name . '">' . $anchor . '</a></li>';
+			}
+		}
+
+		return '<div class="' . $class . '">
+					' . $btn . '
+					<ul>' . $links . '</ul>
+				</div>';
+	}
+
 	public static function table( $table_id ) {
 		// get the post-table pair json data
 		$table_json = get_option( 'tablepress_tables' );

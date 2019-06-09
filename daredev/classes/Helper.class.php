@@ -31,8 +31,6 @@ class Helper {
 	 *
 	 * @param array $elements Elements to be sanitized.
 	 *
-	 * @param array $custom Custom tags.
-	 *
 	 * @return array
 	 */
 	public static function kses_allow_html( $elements = [], $custom = [] ) {
@@ -40,6 +38,7 @@ class Helper {
 			'address'    => [],
 			'a'          => [
 				'id'       => true,
+				'title'    => true,
 				'class'    => true,
 				'href'     => true,
 				'rel'      => true,
@@ -255,6 +254,7 @@ class Helper {
 				'align' => true,
 			],
 			'li'         => [
+				'class' => true,
 				'align' => true,
 				'value' => true,
 			],
