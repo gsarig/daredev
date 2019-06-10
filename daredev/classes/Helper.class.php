@@ -228,7 +228,9 @@ class Helper {
 				'size'    => true,
 				'width'   => true,
 			],
-			'i'          => [],
+			'i'          => [
+				'class' => true,
+			],
 			'img'        => [
 				'alt'      => true,
 				'class'    => true,
