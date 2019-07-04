@@ -294,6 +294,7 @@ class Helper {
 				'class'    => true,
 				'dir'      => true,
 				'align'    => true,
+				'style'    => true,
 				'lang'     => true,
 				'xml:lang' => true,
 			],
