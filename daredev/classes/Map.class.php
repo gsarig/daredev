@@ -90,42 +90,60 @@ class Map {
 		if ( $this->cluster ) {
 			wp_register_script( 'daredev-gmaps-clusters-api',
 				'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js',
-				'', DAREDEV_VERSION, true );
-			wp_register_script( 'daredev-infobox', WPMU_PLUGIN_URL . '/daredev/js/infobox.js',
-				array( 'daredev-locations-api' ), DAREDEV_VERSION, true );
-			wp_register_script( 'daredev-locations', WPMU_PLUGIN_URL . '/daredev/js/cluster.js',
-				array( 'daredev-locations-api', 'daredev-gmaps-clusters-api', 'daredev-infobox' ), DAREDEV_VERSION,
+				'',
+				DAREDEV_VERSION,
+				true );
+			wp_register_script( 'daredev-infobox',
+				WPMU_PLUGIN_URL . '/daredev/js/infobox.js',
+				array( 'daredev-locations-api' ),
+				DAREDEV_VERSION,
+				true );
+			wp_register_script( 'daredev-locations',
+				WPMU_PLUGIN_URL . '/daredev/js/cluster.js',
+				array( 'daredev-locations-api', 'daredev-gmaps-clusters-api', 'daredev-infobox' ),
+				DAREDEV_VERSION,
 				true );
 		} else {
-			wp_register_script( 'daredev-locations', WPMU_PLUGIN_URL . '/daredev/js/locations.js',
-				array( 'daredev-locations-api' ), DAREDEV_VERSION, true );
+			wp_register_script( 'daredev-locations',
+				WPMU_PLUGIN_URL . '/daredev/js/locations.js',
+				array( 'daredev-locations-api' ),
+				DAREDEV_VERSION,
+				true );
 		}
 		if ( $this->directions ) {
-			wp_register_script( 'daredev-autocomplete', WPMU_PLUGIN_URL . '/daredev/js/autocomplete.js',
-				array( 'daredev-locations-api' ), DAREDEV_VERSION, true );
+			wp_register_script( 'daredev-autocomplete',
+				WPMU_PLUGIN_URL . '/daredev/js/autocomplete.js',
+				array( 'daredev-locations-api' ),
+				DAREDEV_VERSION,
+				true );
 		}
 		wp_register_script( 'daredev-locations-api',
-			'https://maps.googleapis.com/maps/api/js?' . $this->api . '&libraries=places', '', DAREDEV_VERSION, true );
+			'https://maps.googleapis.com/maps/api/js?' . $this->api . '&libraries=places',
+			'',
+			DAREDEV_VERSION,
+			true );
 		wp_enqueue_script( [
 			'daredev-locations-api',
 			'daredev-locations',
 			'daredev-cluster',
 			'daredev-autocomplete',
-			'daredev-gmaps-clusters-api'
+			'daredev-gmaps-clusters-api',
 		] );
-		wp_localize_script( 'daredev-locations', 'mapData', [
-			'mapId'    => $this->mapId,
-			'title'    => self::getMapData( 'title' ),
-			'desc'     => self::getMapData( 'excerpt' ),
-			'lat'      => self::getMapData( 'lat' ),
-			'lng'      => self::getMapData( 'lng' ),
-			'zoom'     => intval( $this->zoom ),
-			'img'      => self::getMapData( 'thumb' ),
-			'more'     => self::getMapData( 'more' ),
-			'icon'     => isset( $this->mapIcon ) ? $this->mapIcon : self::getMapData( 'icon' ),
-			'colors'   => $this->colors,
-			'themeUrl' => get_stylesheet_directory_uri(),
-		] );
+		wp_localize_script( 'daredev-locations',
+			'mapData',
+			[
+				'mapId'    => $this->mapId,
+				'title'    => self::getMapData( 'title' ),
+				'desc'     => self::getMapData( 'excerpt' ),
+				'lat'      => self::getMapData( 'lat' ),
+				'lng'      => self::getMapData( 'lng' ),
+				'zoom'     => intval( $this->zoom ),
+				'img'      => self::getMapData( 'thumb' ),
+				'more'     => self::getMapData( 'more' ),
+				'icon'     => isset( $this->mapIcon ) ? $this->mapIcon : self::getMapData( 'icon' ),
+				'colors'   => $this->colors,
+				'themeUrl' => get_stylesheet_directory_uri(),
+			] );
 	}
 
 	/**
@@ -175,6 +193,57 @@ class Map {
 		}
 
 		return $output;
+	}
+
+
+	/**
+	 * A shorthand function to display a single ACF map.
+	 *
+	 * @param $field
+	 * @param string $map_id
+	 * @param string $class
+	 * @param string $width
+	 * @param string $height
+	 * @param string $more_txt
+	 * @param null $icon
+	 * @param null $colors
+	 * @param int $zoom
+	 *
+	 * @return string
+	 */
+	public static function acf_map_single(
+		$field,
+		$map_id = 'map',
+		$class = 'map',
+		$width = '100%',
+		$height = '500px',
+		$more_txt = '',
+		$icon = null,
+		$colors = null,
+		$zoom = 14
+	) {
+		$data[] = [
+			'lat'         => $field ? $field['lat'] : '',
+			'lng'         => $field ? $field['lng'] : '',
+			'title'       => $field ? $field['address'] : '',
+			'description' => '',
+			'image'       => '',
+		];
+		$map    = new Map(
+			$data,
+			null,
+			$map_id,
+			$more_txt,
+			$icon,
+			$colors,
+			true,
+			false,
+			false,
+			$zoom,
+			DD_GOOGLE_MAPS_API_KEY
+		);
+
+		return $map->show( $class, $width, $height );
 	}
 
 	/*
