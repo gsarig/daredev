@@ -106,6 +106,27 @@ function acf_textarea( $data, $elements = [] ) {
 }
 
 /**
+ * Pass extra parameters and attributes to the oEmbedd iframe.
+ *
+ * @param $field
+ * @param array $params
+ * @param string $attributes
+ *
+ * @return mixed
+ */
+function acf_oembed( $field, $params = [], $attributes = '' ) {
+	preg_match( '/src="(.+?)"/', $field, $matches );
+	$src     = $matches[1];
+	$new_src = add_query_arg( $params, $src );
+	$field   = str_replace( $src, $new_src, $field );
+	$field   = str_replace( '></iframe>',
+		' ' . $attributes . '></iframe>',
+		$field );
+
+	return $field;
+}
+
+/**
  * Get event date
  *
  * @param        $from
