@@ -153,6 +153,22 @@ class Element {
 		return $src ? $html : '';
 	}
 
+	/**
+	 * Get custom logo url.
+	 * @return bool
+	 */
+	public static function logo_url() {
+		$url = false;
+		if ( has_custom_logo() ) {
+			$custom_logo_id = get_theme_mod( 'custom_logo' );
+			$logo_meta      = wp_get_attachment_image_src( $custom_logo_id, 'full' );
+
+			$url = $logo_meta[0];
+		}
+
+		return $url;
+	}
+
 	public static function svg_logo() {
 		$logo    = '';
 		$logo_id = get_theme_mod( 'custom_logo' );
