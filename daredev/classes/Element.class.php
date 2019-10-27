@@ -154,6 +154,44 @@ class Element {
 	}
 
 	/**
+	 * Get inline SVG from WordPress image ID
+	 *
+	 * @param $img_id
+	 * @param string $class
+	 * @param string $id
+	 *
+	 * @return false|mixed|string
+	 */
+	public static function wpSvg( $img_id, $class = '', $id = '' ) {
+		$output = '';
+		if ( $img_id ) :
+			ob_start();
+			include get_attached_file( $img_id );
+			$icon = ob_get_contents();
+			ob_end_clean();
+			if ( $class || $id ) {
+				$search  = [];
+				$replace = [];
+				array_push(
+					$search,
+					$class ? 'class="' : null,
+					$id ? '<svg' : null
+				);
+				array_push(
+					$replace,
+					$class ? 'class="' . $class . ' ' : null,
+					$id ? '<svg id="' . $id . '" ' : null
+				);
+				$output = str_replace( $search, $replace, $icon );
+			} else {
+				$output = $icon;
+			}
+		endif;
+
+		return $output;
+	}
+
+	/**
 	 * Get custom logo url.
 	 * @return bool
 	 */
