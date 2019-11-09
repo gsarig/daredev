@@ -98,7 +98,7 @@ Will output that:
 <p>Second line of the textarea</p>
 ```
 ### Get event date range
-If you have an event with a "Start" and "End" date, the following method with take the values and properly display the event's date: sets a separator and if the "Start" date is the same as the "End" date, it will display it only once. 
+If you have an event with a "Start" and "End" date, the following method will take the values and properly display the event's date: sets a separator and if the "Start" date is the same as the "End" date, it will display it only once. 
 ``` 
 DareDev\Field::date_range(
     $from,
@@ -110,7 +110,7 @@ DareDev\Field::date_range(
 ```
 ## Other Helper functions
 ### Limit the displayed excerpt length
-A replacement of `get_the_excerpt()` which allows you to set the length. If an actual excerpt has been set by the user, it will not trim it. Trimming only occurs when no excerpt is set and WordPress uses a part of the content. Example usage: 
+A replacement of `get_the_excerpt()` which allows you to set the character length. If an actual excerpt has been set by the user, it will not trim it. Trimming only occurs when no excerpt is set and WordPress uses a part of the content. Example usage: 
 ``` 
 echo \DareDev\Excerpt::limit(40, 'more...');	 
 ```
