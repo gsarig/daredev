@@ -26,6 +26,28 @@ class Helper {
 	}
 
 	/**
+	 * Obfuscate all the emails found on a given content using antispambot()
+	 *
+	 * @param $content
+	 *
+	 * @return string|string[]|null
+	 */
+	public static function obfuscate_email( $content ) {
+		$pattern = "/[a-zA-Z\d]*@[a-zA-Z\d]*\.[a-zA-Z\.]*/";
+		preg_match_all( $pattern, $content, $matches );
+
+		$content = preg_replace_callback( $pattern,
+			function ( $matches ) {
+				return antispambot( $matches[0] );
+			},
+			$content
+		);
+
+		return $content;
+	}
+
+
+	/**
 	 * Sanitize HTML
 	 * All options: https://core.trac.wordpress.org/browser/tags/5.2.1/src/wp-includes/kses.php#L0
 	 *
