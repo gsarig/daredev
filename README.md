@@ -108,6 +108,91 @@ DareDev\Field::date_range(
     $date_format = 'd/m/Y g:i a'
 );
 ```
+### Built a list of links with icons
+This can be especially handy if you have a list of social icons in an ACF Group of fields which outputs its data in an array like:
+``` 
+$links = [
+    'facebook' => 'https://www.facebook.com/example',
+    'instagram' => 'https://www.instagram.com/example',
+    'linkedin-o' => 'https://www.linkedin.com/example',
+]
+```
+...where the array key is the icon name (FontAwesome or whatever) and the value is the URL. So, this:
+``` 
+echo \DareDev\Element::icon_links($links);
+```
+would output that: 
+``` 
+<ul>
+    <li class="facebook">
+        <a href="https://www.facebook.com/example" target="_blank">
+           <span class="icon icon-facebook"></span>
+        </a>
+    </li>
+    <li class="instagram">
+        <a href="https://www.instagram.com/example" target="_blank">
+           <span class="icon icon-instagram"></span>
+        </a>
+    </li>
+    <li class="linkedin-o">
+        <a href="https://www.linkedin.com/example" target="_blank">
+           <span class="icon icon-linkedin-o"></span>
+        </a>
+    </li>
+</ul>
+```
+The function can accept a few parameters, so, on a full example, given an array like this:
+``` 
+$links = [
+    'facebook' => [
+        'url' => 'https://www.facebook.com/example',
+        'text' => Follow us on Facebook',    
+    ],
+    'instagram' => [
+        'url' => 'https://www.instagram.com/example',
+        'text' => 'Follow us on Instagram',
+    ],
+    'linkedin-o' => [
+        'url' => 'https://www.linkedin.com/example',
+        'text' => 'Follow us on LinkedIn',
+    ],
+]
+```
+the first value of each entry would be considered the URL and the second some additional text that should be displayed. So, with this:
+``` 
+echo \DareDev\Element::icon_links(
+    $links,
+    '<ul class="social">',
+    '</ul>,
+    'fa fab-'
+);
+```
+we get that:
+``` 
+<ul class="social">
+    <li class="facebook">
+        <a href="https://www.facebook.com/example" target="_blank">
+           <span class="fa fab-facebook">
+                <span>Follow us on Facebook</span>
+           </span>
+        </a>
+    </li>
+    <li class="instagram">
+        <a href="https://www.instagram.com/example" target="_blank">
+            <span class="fa fab-instagram">
+               <span>Follow us on Instagram</span>
+          </span>
+        </a>
+    </li>
+    <li class="linkedin-o">
+        <a href="https://www.linkedin.com/example" target="_blank">
+           <span class="fa fab-linkedin-o">
+                <span>Follow us on LinkedIn</span>
+           </span>
+        </a>
+    </li>
+</ul>
+```
 ## Other Helper functions
 ### Limit the displayed excerpt length
 A replacement of `get_the_excerpt()` which allows you to set the character length. If an actual excerpt has been set by the user, it will not trim it. Trimming only occurs when no excerpt is set and WordPress uses a part of the content. Example usage: 

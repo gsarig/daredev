@@ -321,29 +321,38 @@ class Element {
 		     '</form>';
 	}
 
-	public static function social( $array = [] ) {
-		/**
-		 * Get social media links
-		 *
-		 * @param $array array ('icon-name' => 'url')
-		 *
-		 * @return string
-		 */
+	/**
+	 * Create links with font-icons from an array
+	 *
+	 * @param array array ('icon-name' => 'url')
+	 * @param string $before
+	 * @param string $after
+	 * @param string $class_prefix
+	 *
+	 * @return string
+	 */
+	public static function icon_links(
+		$links = [],
+		$before = '<ul>',
+		$after = '</ul>',
+		$class_prefix = 'icon icon-'
+	) {
 		$output = '';
-		if ( $array ) {
+		if ( $links ) {
 			$sites = '';
-			foreach ( $array as $key => $value ) {
-				$url   = is_array( $value ) ? $value[0] : $value;
-				$txt   = is_array( $value ) ? '<span>' . $value[1] . '</span>' : '';
+			foreach ( $links as $key => $value ) {
+				$url = is_array( $value ) ? $value[0] : $value;
+				$txt = is_array( $value ) ? '<span>' . $value[1] . '</span>' : '';
+
 				$sites .= ( $url ) ?
 					'<li class="' . $key . '">
-                                <a href="' . $url . '" target="_blank">
-                                    <i class="icon icon-' . $key . '">' . $txt . '</i>
-                                </a>
-                            </li>'
+                        <a href="' . esc_url( $url ) . '" target="_blank">
+                            <span class="' . $class_prefix . $key . '">' . $txt . '</span>
+                        </a>
+                    </li>'
 					: '';
 			}
-			$output = ( $array ) ? '<ul>' . $sites . '</ul>' : '';
+			$output = $before . $sites . $after;
 		}
 
 		return $output;
