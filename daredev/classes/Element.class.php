@@ -31,7 +31,7 @@ class Element {
 				'anchor' => '<span class="anchor"><span class="text">Facebook</span></span>',
 			],
 			'twitter'   => [
-				'href'   => 'https://twitter.com/home?status=' . $share_title . ' | ' . $permalink,
+				'href'   => '"https://twitter.com/share?text=' . $share_title . '&url=' . $permalink,
 				'anchor' => '<span class="anchor"><span class="text">Twitter</span></span>',
 			],
 			'pinterest' => [
