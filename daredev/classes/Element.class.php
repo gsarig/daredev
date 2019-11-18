@@ -154,19 +154,20 @@ class Element {
 	}
 
 	/**
-	 * Get inline SVG from WordPress image ID
+	 * Get inline SVG from WordPress image ID or URL
 	 *
-	 * @param $img_id
+	 * @param $img
 	 * @param string $class
 	 * @param string $id
 	 *
 	 * @return false|mixed|string
 	 */
-	public static function wpSvg( $img_id, $class = '', $id = '' ) {
+	public static function inline_svg( $img, $class = '', $id = '' ) {
 		$output = '';
-		if ( $img_id ) :
+		if ( $img ) :
+			$img_url = is_int( $img ) ? get_attached_file( $img ) : $img;
 			ob_start();
-			include get_attached_file( $img_id );
+			include $img_url;
 			$icon = ob_get_contents();
 			ob_end_clean();
 			if ( $class || $id ) {

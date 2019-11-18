@@ -194,6 +194,11 @@ we get that:
 </ul>
 ```
 ## Other Helper functions
+### Get inline SVG from an image ID or URL
+Inline SVG elements allow more flexibility with styling. To get such an inline element from an existing SVG file, use:
+``` 
+echo \DareDev\Element::inline_svg( $img_id_or_url, 'example-class', 'example-id' );
+```
 ### Limit the displayed excerpt length
 A replacement of `get_the_excerpt()` which allows you to set the character length. If an actual excerpt has been set by the user, it will not trim it. Trimming only occurs when no excerpt is set and WordPress uses a part of the content. Example usage: 
 ``` 
