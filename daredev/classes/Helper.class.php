@@ -46,6 +46,25 @@ class Helper {
 		return $content;
 	}
 
+	/**
+	 * Get site name from URL
+	 *
+	 * @param string $url URL
+	 * @param string $pattern preg_replace pattern
+	 *
+	 * @return string
+	 */
+	public static function name_from_url( $url, $pattern = '/(www.|.com|.gr)/' ) {
+		return $url ? ucfirst(
+			preg_replace(
+				$pattern,
+				'',
+				wp_parse_url(
+					$url
+				)['host']
+			)
+		) : '';
+	}
 
 	/**
 	 * Sanitize HTML

@@ -232,3 +232,12 @@ This is useful for Greek text, where you might want to transform text to upperca
 ```
 \DareDev\Transform::removeAccents( $string );
 ```
+### Get site name from URL
+For example, this:
+``` 
+\DareDev\Helper::name_from_url( 'https://www.example.com' );
+```
+will return that:
+``` 
+Example
+```
