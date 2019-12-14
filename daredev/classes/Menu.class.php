@@ -19,7 +19,12 @@ class Menu {
 	public $text;
 	public $text_class;
 
-	public function __construct( $initial_color = '#000000', $clicked_color = '#666666', $text = 'Menu', $text_class = '' ) {
+	public function __construct(
+		$initial_color = '#000000',
+		$clicked_color = '#666666',
+		$text = 'Menu',
+		$text_class = ''
+	) {
 		$this->initial_color = $initial_color;
 		$this->clicked_color = $clicked_color;
 		$this->text          = $text;
@@ -45,7 +50,7 @@ class Menu {
 	private function styles() {
 		wp_enqueue_style(
 			'daredev-menu-styles',
-			plugin_dir_url( __DIR__ ) . 'css/custom.css'
+			WPMU_PLUGIN_URL . '/daredev/css/custom.css'
 		);
 		$menu_css = "
 				.menu-toggle > .menu-icon {
