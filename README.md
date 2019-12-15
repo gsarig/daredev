@@ -241,3 +241,21 @@ will return that:
 ``` 
 Example
 ```
+### Format date
+Get the post date and apply different style to each part. 
+
+For example, this:
+``` 
+\DareDev\Helper::date(
+    [ 
+        '<span class="mon"></span>',    
+        '<span class="day"></span>' 
+    ],
+    'M j'
+);
+``` 
+Will return that: 
+``` 
+<span class="mon">Dec</span>
+<span class="day">13</span>	
+```

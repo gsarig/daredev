@@ -66,6 +66,35 @@ class Helper {
 		) : '';
 	}
 
+
+	/**
+	 * Get the date and apply different style to each part
+	 *
+	 * @param array $elements The markup for each line.
+	 * @param string $d Date format (https://www.php.net/manual/en/function.date.php)
+	 * @param null $post Post id
+	 * @param string $delimiter The date separator.
+	 *
+	 * @return string
+	 */
+	public static function date( $elements = [], $d = '', $post = null, $delimiter = ' ' ) {
+		$get_date = get_the_date( $d, $post );
+		$text     = explode( $delimiter, $get_date );
+		$output   = '';
+		if ( $text ) {
+			$count = count( $elements );
+			foreach ( $text as $key => $value ) {
+				// If element tags are less than the text lines, format the remaining lines with the last element tag
+				$element = isset( $elements[ $key ] ) ? $elements[ $key ] : $elements[ $count - 1 ];
+				// If an element tag is blank, return the value
+				$markup = $element ? str_replace( '><', '>' . $value . '<', $element ) : $value;
+				$output .= $value ? $markup : '';
+			}
+		}
+
+		return $output;
+	}
+
 	/**
 	 * Sanitize HTML
 	 * All options: https://core.trac.wordpress.org/browser/tags/5.2.1/src/wp-includes/kses.php#L0
