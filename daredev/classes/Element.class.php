@@ -170,6 +170,9 @@ class Element {
 			include $img_url;
 			$icon = ob_get_contents();
 			ob_end_clean();
+			if ( $class && ! strpos( $icon, 'class="' ) ) {
+				$icon = str_replace( '<svg', '<svg class=""', $icon );
+			}
 			if ( $class || $id ) {
 				$search  = [];
 				$replace = [];
