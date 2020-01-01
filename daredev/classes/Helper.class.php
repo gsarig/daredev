@@ -96,6 +96,27 @@ class Helper {
 	}
 
 	/**
+	 * Replace text between strings.
+	 *
+	 * @param $str
+	 * @param $needle_start
+	 * @param $needle_end
+	 * @param $replacement
+	 *
+	 * @return string|string[]
+	 */
+	public static function replace_between( $str, $needle_start, $needle_end, $replacement ) {
+		$pos   = strpos( $str, $needle_start );
+		$start = false === $pos ? 0 : $pos + strlen( $needle_start );
+
+		$pos = strpos( $str, $needle_end, $start );
+		$end = false === $pos ? strlen( $str ) : $pos;
+
+		return substr_replace( $str, $replacement, $start, $end - $start );
+	}
+
+	
+	/**
 	 * Sanitize HTML
 	 * All options: https://core.trac.wordpress.org/browser/tags/5.2.1/src/wp-includes/kses.php#L0
 	 *

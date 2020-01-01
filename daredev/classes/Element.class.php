@@ -159,10 +159,11 @@ class Element {
 	 * @param $img
 	 * @param string $class
 	 * @param string $id
+	 * @param string $title
 	 *
 	 * @return false|mixed|string
 	 */
-	public static function inline_svg( $img, $class = '', $id = '' ) {
+	public static function inline_svg( $img, $class = '', $id = '', $title = '' ) {
 		$output = '';
 		if ( $img ) :
 			$img_url = is_int( $img ) ? get_attached_file( $img ) : $img;
@@ -170,6 +171,11 @@ class Element {
 			include $img_url;
 			$icon = ob_get_contents();
 			ob_end_clean();
+			if ( false === $title ) {
+				$icon = Helper::replace_between( $icon, '<title>', '</title>', '' );
+			} elseif ( $title ) {
+				$icon = Helper::replace_between( $icon, '<title>', '</title>', $title );
+			}
 			if ( $class && ! strpos( $icon, 'class="' ) ) {
 				$icon = str_replace( '<svg', '<svg class=""', $icon );
 			}
