@@ -59,12 +59,14 @@ class Field {
 	 */
 	public static function oembed( $field, $params = [], $attributes = '' ) {
 		preg_match( '/src="(.+?)"/', $field, $matches );
-		$src     = $matches[1];
-		$new_src = add_query_arg( $params, $src );
-		$field   = str_replace( $src, $new_src, $field );
-		$field   = str_replace( '></iframe>',
-			' ' . $attributes . '></iframe>',
-			$field );
+		if ( isset( $matches[1] ) ) {
+			$src     = $matches[1];
+			$new_src = add_query_arg( $params, $src );
+			$field   = str_replace( $src, $new_src, $field );
+			$field   = str_replace( '></iframe>',
+				' ' . $attributes . '></iframe>',
+				$field );
+		}
 
 		return $field;
 	}
