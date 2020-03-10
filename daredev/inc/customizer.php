@@ -27,7 +27,7 @@ function daredev_register_theme_customizer( $wp_customize ) {
 	// Google Maps API Key
 	// Add setting
 	$wp_customize->add_setting( 'dd_gmaps_api_key', array(
-		'default'           => 'AIzaSyDBmFSKOk-PAfxVAgEBDpOKB8ft8kOAx0U',
+		'default'           => '',
 		'sanitize_callback' => 'sanitize_text',
 	) );
 	// Add control

@@ -246,6 +246,62 @@ class Map {
 		return $map->show( $class, $width, $height );
 	}
 
+	/**
+	 * A shorthand function to display a multi-marker ACF map from a repeater field.
+	 *
+	 * @param array $field
+	 * @param string $subfield
+	 * @param string $map_id
+	 * @param string $class
+	 * @param string $width
+	 * @param string $height
+	 * @param string $more_txt
+	 * @param null $icon
+	 * @param null $colors
+	 * @param int $zoom
+	 *
+	 * @return string
+	 */
+	public static function acf_map_repeater(
+		$field,
+		$subfield,
+		$map_id = 'map',
+		$class = 'map',
+		$width = '100%',
+		$height = '500px',
+		$more_txt = '',
+		$icon = null,
+		$colors = null,
+		$zoom = 14
+	) {
+
+		$data = [];
+		foreach ( $field as $location ) {
+			$data[] = [
+				'lat'         => $location[ $subfield ] ? $location[ $subfield ]['lat'] : '',
+				'lng'         => $location[ $subfield ] ? $location[ $subfield ]['lng'] : '',
+				'title'       => $location[ $subfield ] ? $location[ $subfield ]['address'] : '',
+				'description' => '',
+				'image'       => '',
+			];
+		}
+		$map = new Map(
+			$data,
+			null,
+			$map_id,
+			$more_txt,
+			$icon,
+			$colors,
+			true,
+			false,
+			false,
+			$zoom,
+			DD_GOOGLE_MAPS_API_KEY
+		);
+
+		return $map->show( $class, $width, $height );
+	}
+
 	/*
 	 * Set Map Data
 	 */

@@ -57,6 +57,13 @@ For example:
 $map = get_field('acf_map_field');
 echo \DareDev\Map::acf_map_single( $map );
 ```
+
+Similarly, to display a map with multiple markers from an ACF repeater field:
+``` 
+$locations = get_field('acf_map_repeater_field');
+echo \DareDev\Map::acf_map_repeater( $locations, 'subfield_with_location_data' );
+```
+
 Full list of parameters:
 ``` 
 \DareDev\Map::acf_map_single(
@@ -71,6 +78,7 @@ Full list of parameters:
     $zoom = 14
 );
 ```
+
 `$icon` can be a custom URL pointing to your custom marker icon.
 `$colors` is an array of 3 colors which will be applied to the map. for example:
 `['#cccccc', '#000000', '#ffffff']`
