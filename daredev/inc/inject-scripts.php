@@ -3,10 +3,6 @@
  * Inject 3rd party scripts on Header, body and footer
  */
 
-function dd_body() {
-	do_action( 'dd_body' );
-}
-
 /**
  * Hook the fields
  */
@@ -16,7 +12,7 @@ function dd_head_scripts() {
 
 }
 
-add_action( 'dd_body', 'dd_body_scripts' );
+add_action( 'wp_body_open', 'dd_body_scripts' );
 function dd_body_scripts() {
 	echo dd_cookie_check( get_theme_mod( 'dd_body_scripts' ) );
 }
@@ -29,6 +25,7 @@ function dd_footer_scripts() {
 /**
  * Load scripts only if a specific cookie is set. Example:
  * <<cookie=eucookie>>YOUR SCRIPT HERE<</cookie>>
+ *
  * @param $scripts
  *
  * @return string
