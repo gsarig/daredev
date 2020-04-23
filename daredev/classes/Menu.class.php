@@ -39,9 +39,9 @@ class Menu {
 
 		return '<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
 					<span class="menu-icon">
-						<span class="first"></span>
-						<span class="second"></span>
-						<span class="third"></span>
+						<span class="first">&nbsp;</span>
+						<span class="second">&nbsp;</span>
+						<span class="third">&nbsp;</span>
 					</span>
 					<span class="' . $text_class . '">' . $this->text . '</span>
 				</button>';
