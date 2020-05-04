@@ -64,3 +64,5 @@ function dd_acf_json_load_point( $paths ) {
 if ( WP_DEBUG !== true ) {
 	add_filter( 'acf/settings/show_admin', '__return_false' );
 }
+
+//require_once dirname( __FILE__ ) . '/acf-lite.php';
