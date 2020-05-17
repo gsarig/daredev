@@ -50,6 +50,22 @@ And a full example with Greek labels:
         true
     );
 ```
+
+### Add numeric pagination
+Numeric pagination with no need for additional plugins. For example this:
+``` 
+ echo \DareDev\Element::numericPagination();
+```
+would output a pagination like that:
+
+&laquo; 1 2 3 ... 6 &raquo;
+
+You can use your own prev/next links and assign a custom class name like so:
+ 
+``` 
+ echo \DareDev\Element::numericPagination('<span>previous</span>', '<span>next</span>', 'my-class');
+```
+
 ## ACF Helper methods
 ### Display an ACF Google Map
 For example:

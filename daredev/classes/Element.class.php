@@ -240,82 +240,32 @@ class Element {
 			: '';
 	}
 
-	public static function numericPagination( $prevTxt = null, $nextTxt = null ) {
-		/*
-		 * Add numeric pagination to archives
-		*/
-		if ( is_singular() ) {
-			return;
-		}
+	/*
+	 * Numbered pagination
+	 * @link https://codex.wordpress.org/Function_Reference/paginate_links
+	 */
 
+	public static function numericPagination(
+		$prev = '<span class="numbered__pagination-prev">&laquo;<span class="screen-reader-text">Previous</span></span>',
+		$next = '<span class="numbered__pagination-next">&raquo;<span class="screen-reader-text">Next</span></span>',
+		$class = 'numbered__pagination-container'
+	) {
 		global $wp_query;
 
-		/** Stop execution if there's only 1 page */
-		if ( $wp_query->max_num_pages <= 1 ) {
-			return;
-		}
+		$big        = 999999999; // need an unlikely integer
+		$translated = __( 'Page', 'daredev' );
 
-		$paged = get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1;
-		$max   = intval( $wp_query->max_num_pages );
+		$nav = paginate_links( array(
+			'base'               => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+			'format'             => '?paged=%#%',
+			'current'            => max( 1, get_query_var( 'paged' ) ),
+			'total'              => $wp_query->max_num_pages,
+			'prev_text'          => $prev,
+			'next_text'          => $next,
+			'before_page_number' => '<span class="screen-reader-text">' . $translated . ' </span>',
+		) );
 
-		/**    Add current page to the array */
-		if ( $paged >= 1 ) {
-			$links[] = $paged;
-		}
-
-		/**    Add the pages around the current page to the array */
-		if ( $paged >= 3 ) {
-			$links[] = $paged - 1;
-			$links[] = $paged - 2;
-		}
-
-		if ( ( $paged + 2 ) <= $max ) {
-			$links[] = $paged + 2;
-			$links[] = $paged + 1;
-		}
-
-		echo '<div class="pagination"><ul>' . "\n";
-
-		/**    Previous Post Link */
-		if ( get_previous_posts_link() ) {
-			printf( '<li>%s</li>' . "\n", get_previous_posts_link( $prevTxt ) );
-		}
-
-		/**    Link to first page, plus ellipses if necessary */
-		if ( ! in_array( 1, $links ) ) {
-			$class = 1 == $paged ? ' class="active"' : '';
-
-			printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( 1 ) ), '1' );
-
-			if ( ! in_array( 2, $links ) ) {
-				echo '<li>…</li>';
-			}
-		}
-
-		/**    Link to current page, plus 2 pages in either direction if necessary */
-		sort( $links );
-		foreach ( (array) $links as $link ) {
-			$class = $paged == $link ? ' class="active"' : '';
-			printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $link ) ), $link );
-		}
-
-		/**    Link to last page, plus ellipses if necessary */
-		if ( ! in_array( $max, $links ) ) {
-			if ( ! in_array( $max - 1, $links ) ) {
-				echo '<li>…</li>' . "\n";
-			}
-
-			$class = $paged == $max ? ' class="active"' : '';
-			printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $max ) ), $max );
-		}
-
-		/**    Next Post Link */
-		if ( get_next_posts_link() ) {
-			printf( '<li>%s</li>' . "\n", get_next_posts_link( $nextTxt ) );
-		}
-
-		echo '</ul></div>' . "\n";
-
+		return '<div class="' . $class . '">' . $nav . '</div>';
 	}
 
 	public static function searchBox( $txt = 'Search', $icon = '<i class="icon-search"></i>', $showButton = false ) {
