@@ -11,6 +11,7 @@ class Taxonomy {
 	public $greek;
 	public $column;
 	public $rest;
+	public $options = [];
 
 	public function __construct(
 		$name,
@@ -19,7 +20,8 @@ class Taxonomy {
 		$slug = false,
 		$greek = false,
 		$column = false,
-		$rest = false
+		$rest = false,
+		$options = []
 	) {
 		$this->name       = $name;
 		$required_labels  = [
@@ -35,14 +37,14 @@ class Taxonomy {
 		$this->get_labels = $this->labels + $this->defaultLabels();
 		$this->column     = $column;
 		$this->rest       = $rest;
-		$this->options    = [
+		$default_options  = [
 			'labels'            => $this->get_labels,
 			'hierarchical'      => true,
 			'rewrite'           => [ 'slug' => ( false !== $this->slug ) ? strtolower( $this->slug ) : strtolower( $this->name ) ],
 			'show_admin_column' => $this->column,
 			'show_in_rest'      => $this->rest,
 		];
-
+		$this->options    = $options + $default_options;
 		add_action( 'init', array( $this, 'register' ) );
 
 	}
@@ -115,6 +117,9 @@ class Taxonomy {
         ],
         'archive_slug',
         'greek',
-        true
+        true,
+		[
+			'hierarchical' => false,
+		]
     );
 */
