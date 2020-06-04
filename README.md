@@ -66,6 +66,13 @@ You can use your own prev/next links and assign a custom class name like so:
  echo \DareDev\Element::numericPagination('<span>previous</span>', '<span>next</span>', 'my-class');
 ```
 
+### Fetch media from Instagram
+ Get Instagram media on WordPress using the current Instagram (Facebook) API ([Read details](https://www.gsarigiannidis.gr/instagram-feed-api-after-june-2020/)). Example:
+  
+ ``` 
+ $media = \DareDev\Instagram::media(TOKEN, USER_ID);
+```
+
 ## ACF Helper methods
 ### Display an ACF Google Map
 For example:
