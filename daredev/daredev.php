@@ -8,13 +8,29 @@
 define( 'DAREDEV_VERSION', '3.0' );
 define( 'DD_GOOGLE_MAPS_API_KEY', get_theme_mod( 'dd_gmaps_api_key' ) );
 
-// Define additional MU-Plugin paths to save ACF JSON fields.
-define(
-	'DD_ACF_JSON_PATHS',
-	[
-		'gutenblocks',
-	]
-);
+function daredev_settings() {
+	$options = [
+		'custom_scripts' => false,
+		'acf_paths'      => [],
+		'acf_hide'       => false,
+	];
+
+	if ( has_filter( 'daredev_settings' ) ) {
+		$options = apply_filters( 'daredev_settings', $options );
+	}
+
+	return $options;
+}
+
+function daredev_setting( $setting ) {
+	$output   = null;
+	$settings = daredev_settings();
+	if ( $setting && isset( $settings[ $setting ] ) ) {
+		$output = $settings[ $setting ];
+	}
+
+	return $output;
+}
 
 // Localize it.
 load_plugin_textdomain( 'daredev', false, basename( dirname( __FILE__ ) ) . '/languages' );

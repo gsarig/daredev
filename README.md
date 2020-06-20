@@ -290,3 +290,27 @@ Will return that:
 <span class="mon">Dec</span>
 <span class="day">13</span>	
 ```
+
+### Customize settings
+The plugin has a few settings that you can manually turn on. To do so, there is the `daredev_settings` filter, which you can use in your theme/plugin like so:
+
+```
+function my_custom_settings( $options ) {
+
+    // Hides ACF Settings from the admin, if WP-DEBUG is off
+    $options['acf_hide'] = true;
+
+    // Enables script injections
+    $options['custom_scripts'] = true;
+
+    // Adds additional ACF json paths
+    $options['acf_paths'] = [
+        '/my-path-1/acf-json',
+        '/my-path-2/folder',
+    ];
+
+    return $options;
+}
+
+add_filter( 'daredev_settings', 'my_custom_settings' );
+```

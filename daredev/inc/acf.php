@@ -49,20 +49,31 @@ function dd_acf_json_save_point( $path ) {
 }
 
 function dd_acf_json_load_point( $paths ) {
+	$additional_paths = daredev_setting( 'acf_json_paths' );
 	unset( $paths[0] );
 	$paths[] = WPMU_PLUGIN_DIR . '/daredev/acf-json';
-	if ( DD_ACF_JSON_PATHS ) {
-		foreach ( DD_ACF_JSON_PATHS as $path ) {
-			$paths[] = WPMU_PLUGIN_DIR . '/' . $path . '/acf-json';
+	if ( $additional_paths ) {
+		foreach ( $additional_paths as $path ) {
+			$paths[] = $path;
 		}
 	}
 
 	return $paths;
 }
 
+
 // Hide ACF when debug is set to false.
-if ( WP_DEBUG !== true ) {
-	add_filter( 'acf/settings/show_admin', '__return_false' );
+function dd_hide_acf() {
+	$output = 'true';
+	if ( daredev_setting( 'acf_hide' ) ) {
+		$output = 'false';
+	}
+	if ( WP_DEBUG !== true ) {
+		add_filter( 'acf/settings/show_admin', '__return_' . $output );
+	}
 }
 
-//require_once dirname( __FILE__ ) . '/acf-lite.php';
+add_action( 'init', 'dd_hide_acf' );
+
+// ACF Lite
+// require_once dirname( __FILE__ ) . '/acf-lite.php';

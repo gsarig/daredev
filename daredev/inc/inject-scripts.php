@@ -8,18 +8,23 @@
  */
 add_action( 'wp_head', 'dd_head_scripts' );
 function dd_head_scripts() {
-	echo dd_cookie_check( get_theme_mod( 'dd_header_scripts' ) );
-
+	if ( daredev_setting( 'custom_scripts' ) ) {
+		echo dd_cookie_check( get_theme_mod( 'dd_header_scripts' ) );
+	}
 }
 
 add_action( 'wp_body_open', 'dd_body_scripts' );
 function dd_body_scripts() {
-	echo dd_cookie_check( get_theme_mod( 'dd_body_scripts' ) );
+	if ( daredev_setting( 'custom_scripts' ) ) {
+		echo dd_cookie_check( get_theme_mod( 'dd_body_scripts' ) );
+	}
 }
 
 add_action( 'wp_footer', 'dd_footer_scripts' );
 function dd_footer_scripts() {
-	echo dd_cookie_check( get_theme_mod( 'dd_footer_scripts' ) );
+	if ( daredev_setting( 'custom_scripts' ) ) {
+		echo dd_cookie_check( get_theme_mod( 'dd_footer_scripts' ) );
+	}
 }
 
 /**
@@ -33,7 +38,7 @@ function dd_footer_scripts() {
 function dd_cookie_check( $scripts ) {
 	preg_match_all( '/<<cookie=(.*?)>>(.*?)<<\/cookie>>/s', $scripts, $match );
 	$output = '';
-	if ( $match[1] ) {
+	if ( isset( $match[1] ) && ( daredev_setting( 'custom_scripts' ) ) ) {
 		foreach ( $match[1] as $num => $cookie ) {
 
 			if ( isset( $_COOKIE[ $cookie ] ) || $cookie === '0' ) {
