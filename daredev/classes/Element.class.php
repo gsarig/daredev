@@ -52,13 +52,13 @@ class Element {
 			foreach ( $networks as $name => $anchor ) {
 				$href  = $all_networks[ $name ]['href'];
 				$txt   = $anchor ? $anchor : $all_networks[ $name ]['anchor'];
-				$links .= '<li class="' . $name . '"><a href="' . $href . '" target="_blank" title="' . $name . '">' . $txt . '</a></li>';
+				$links .= '<li class="' . esc_attr( $name ) . '"><a href="' . esc_url( $href ) . '" target="_blank" title="' . esc_html( $name ) . '">' . $txt . '</a></li>';
 			}
 		} else {
 			foreach ( $all_networks as $name => $value ) {
 				$href   = $value['href'];
 				$anchor = $value['anchor'];
-				$links  .= '<li class="' . $name . '"><a href="' . $href . '" target="_blank" title="' . $name . '">' . $anchor . '</a></li>';
+				$links  .= '<li class="' . esc_attr( $name ) . '"><a href="' . esc_url( $href ) . '" target="_blank" title="' . esc_html( $name ) . '">' . $anchor . '</a></li>';
 			}
 		}
 
