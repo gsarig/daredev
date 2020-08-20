@@ -50,6 +50,28 @@ And a full example with Greek labels:
         true
     );
 ```
+### Social share links
+Easily display social sharing links. On its simplest form, this:
+```
+echo DareDev\Element::share();
+```
+Would output a list of icons that share the current url on Social networks. Available options are Facebook, Twitter, LinkedIn, Pinterest and Email. You can restrict it to specific networks like so:
+
+```
+echo DareDev\Element::share(['facebook','twitter']);
+```
+If you don't like the default icons, or you want to have full control over the output, you can pass your own anchor text for each network, customize the trigger button, pass a specific post id to be shared and modify the container class. Here is a full example:
+```
+echo DareDev\Element::share(
+[
+    'facebook' => '<span class="my-facebook">Share me on Facebook</span>',
+    'twitter' => '<span class="my-twitter">Share me on Twitter</span>',
+],
+'<span class="my-button">My Custom share trigger</span>',
+$post_id,
+'my-container-class'
+);
+```
 
 ### Add numeric pagination
 Numeric pagination with no need for additional plugins. For example this:

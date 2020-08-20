@@ -19,46 +19,65 @@ class Element {
 	 *
 	 * @return string
 	 */
-	public static function share( $networks = [], $button = null, $post_id = null, $class = 'social-share' ) {
-		$permalink    = esc_url( get_the_permalink( $post_id ) );
-		$thumbnail    = get_the_post_thumbnail_url( $post_id, 'medium' );
-		$share_title  = get_the_title( $post_id );
-		$description  = get_the_excerpt( $post_id );
-		$btn          = $button ? $button : '<button class="share-toggle-button">Share</button>';
+	public static function share( $networks = [], $button = 'button', $post_id = null, $class = 'social-share' ) {
+		$permalink   = esc_url( get_the_permalink( $post_id ) );
+		$thumbnail   = get_the_post_thumbnail_url( $post_id, 'medium' );
+		$share_title = get_the_title( $post_id );
+		$description = get_the_excerpt( $post_id );
+		$share_txt   = __( 'Share', 'daredev' );
+
+		if ( 'button' === $button ) {
+			$btn = '<button class="share-toggle-button">'
+			       . $share_txt .
+			       '</button>';
+		} elseif ( 'checkbox' === $button ) {
+			$btn = '<input type="checkbox" id="shareBtn" class="share-toggle-button">
+						<label for="shareBtn">' .
+			       Element::inline_svg( WPMU_PLUGIN_DIR . '/daredev/icons/share.svg' ) . '
+						</label>';
+		} else {
+			$btn = $button;
+		}
+
 		$all_networks = [
 			'facebook'  => [
 				'href'   => 'https://www.facebook.com/sharer/sharer.php?u=' . $permalink,
-				'anchor' => '<span class="anchor"><span class="text">Facebook</span></span>',
+				'anchor' => Element::inline_svg( WPMU_PLUGIN_DIR . '/daredev/icons/facebook.svg' ),
 			],
 			'twitter'   => [
 				'href'   => '"https://twitter.com/share?text=' . $share_title . '&url=' . $permalink,
-				'anchor' => '<span class="anchor"><span class="text">Twitter</span></span>',
+				'anchor' => Element::inline_svg( WPMU_PLUGIN_DIR . '/daredev/icons/twitter.svg' ),
 			],
 			'pinterest' => [
 				'href'   => 'https://pinterest.com/pin/create/button/?url=' . $permalink . '&media=' . $thumbnail . '&description=' . $description,
-				'anchor' => '<span class="anchor"><span class="text">Pinterest</span></span>',
+				'anchor' => Element::inline_svg( WPMU_PLUGIN_DIR . '/daredev/icons/pinterest.svg' ),
 			],
 			'linkedin'  => [
 				'href'   => 'https://www.linkedin.com/shareArticle?mini=true&url=' . $permalink . '&title=' . $share_title . '&summary=' . $description . '&source=' . get_site_url() . '',
-				'anchor' => '<span class="anchor"><span class="text">LinkedIn</span></span>',
+				'anchor' => Element::inline_svg( WPMU_PLUGIN_DIR . '/daredev/icons/linkedin.svg' ),
 			],
 			'email'     => [
 				'href'   => 'mailto:?subject=' . $share_title . '&body=' . $description . ' (' . $permalink . ')',
-				'anchor' => '<span class="anchor"><span class="text">Email</span></span>',
+				'anchor' => Element::inline_svg( WPMU_PLUGIN_DIR . '/daredev/icons/email.svg' ),
 			],
 		];
 		$links        = '';
 		if ( $networks ) {
-			foreach ( $networks as $name => $anchor ) {
-				$href  = $all_networks[ $name ]['href'];
-				$txt   = $anchor ? $anchor : $all_networks[ $name ]['anchor'];
-				$links .= '<li class="' . esc_attr( $name ) . '"><a href="' . esc_url( $href ) . '" target="_blank" title="' . esc_html( $name ) . '">' . $txt . '</a></li>';
+			if ( Helper::is_assoc( $networks ) ) {
+				foreach ( $networks as $name => $anchor ) {
+					$txt   = $anchor ? $anchor : $all_networks[ $name ]['anchor'];
+					$links .= self::get_share_link( $name, $all_networks[ $name ]['href'], $txt );
+				}
+			} else {
+				foreach ( $networks as $network ) {
+					$links .= self::get_share_link( $network,
+						$all_networks[ $network ]['href'],
+						$all_networks[ $network ]['anchor'] );
+				}
 			}
 		} else {
 			foreach ( $all_networks as $name => $value ) {
-				$href   = $value['href'];
-				$anchor = $value['anchor'];
-				$links  .= '<li class="' . esc_attr( $name ) . '"><a href="' . esc_url( $href ) . '" target="_blank" title="' . esc_html( $name ) . '">' . $anchor . '</a></li>';
+				$links .= self::get_share_link( $name, $value['href'], $value['anchor'] );
 			}
 		}
 
@@ -66,6 +85,10 @@ class Element {
 					' . $btn . '
 					<ul>' . $links . '</ul>
 				</div>';
+	}
+
+	private static function get_share_link( $name, $href, $anchor ) {
+		return '<li class="' . esc_attr( $name ) . '"><a href="' . esc_url( $href ) . '" target="_blank" title="' . esc_html( $name ) . '">' . $anchor . '</a></li>';
 	}
 
 	public static function table( $table_id ) {

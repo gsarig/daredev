@@ -66,6 +66,21 @@ class Helper {
 		) : '';
 	}
 
+	/**
+	 *
+	 * Check if array is associative
+	 *
+	 * @param array $arr
+	 *
+	 * @return bool
+	 */
+	public static function is_assoc( array $arr ) {
+		if ( array() === $arr ) {
+			return false;
+		}
+
+		return array_keys( $arr ) !== range( 0, count( $arr ) - 1 );
+	}
 
 	/**
 	 * Get the date and apply different style to each part
@@ -115,7 +130,7 @@ class Helper {
 		return substr_replace( $str, $replacement, $start, $end - $start );
 	}
 
-	
+
 	/**
 	 * Sanitize HTML
 	 * All options: https://core.trac.wordpress.org/browser/tags/5.2.1/src/wp-includes/kses.php#L0
