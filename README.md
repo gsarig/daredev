@@ -94,6 +94,39 @@ You can use your own prev/next links and assign a custom class name like so:
  ``` 
  $media = \DareDev\Instagram::media(TOKEN, USER_ID);
 ```
+### Language switcher
+If you are using WPML, you can easily call a custom language switcher wherever you want on your theme, with:
+```
+echo \DareDev\Language::switcher();
+```
+This should output a markup similar to this:
+```
+<div class="dd-lang-container">
+    <ul>
+        <li class="lang-en">
+            <a rel="alternate" hreflang="en" href="http://example.com/en">English</a>
+        </li>
+        <li class="lang-el current">
+            <a rel="alternate" hreflang="el" href="http://example.com/">Greek</a>
+        </li>
+    </ul>
+</div>
+```
+Full list of parameters:
+```
+\DareDev\Language::switcher(
+    $type = 'wpml',
+    $before = '',
+    $after = '',
+    $params = 'skip_missing=0&orderby=custom'
+);
+```
+
+`$type` should be `wpml` (the only one supported at the moment).
+
+`$before` and `$after` is any extra content to be displayed before and after the `<ul></ul>` list. 
+
+`$params` include any extra parameters to the language switcher, as described on the [WPML documetation](https://wpml.org/documentation/getting-started-guide/language-setup/custom-language-switcher/).
 
 ## ACF Helper methods
 ### Display an ACF Google Map
