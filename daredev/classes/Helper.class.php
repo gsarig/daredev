@@ -5,6 +5,41 @@ namespace DareDev;
 class Helper {
 
 	/**
+	 * Search array recursively.
+	 *
+	 * @link https://stackoverflow.com/a/1019126/2964491
+	 *
+	 * @param $array
+	 * @param $key
+	 * @param $value
+	 *
+	 * @return array
+	 */
+
+	// Recursive calls store their results in the same temporary $results array rather than merging arrays together.
+	public static function array_search( $array, $key = '', $value = [] ) {
+		$results = [];
+		self::search_r( $array, $key, $value, $results );
+
+		return $results;
+	}
+
+	// The key there is that search_r takes its fourth parameter by reference rather than by value; the ampersand & is crucial.
+	private static function search_r( $array, $key, $value, &$results ) {
+		if ( ! is_array( $array ) ) {
+			return;
+		}
+
+		if ( isset( $array[ $key ] ) && in_array( $array[ $key ], $value, true ) ) {
+			$results[] = $array;
+		}
+
+		foreach ( $array as $subarray ) {
+			self::search_r( $subarray, $key, $value, $results );
+		}
+	}
+
+	/**
 	 * Get page template ID by template name
 	 *
 	 * @param $page_template_name

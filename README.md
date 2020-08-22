@@ -279,6 +279,30 @@ we get that:
     </li>
 </ul>
 ```
+## Gutenberg Helper methods
+### Get specific blocks from a post
+It's like getting a post's featured image, only with a specific Gutenberg block instead of the photo. In its simplest form all you have to do is this:
+```
+echo \DareDev\Block::get( [ 'core/gallery' ] );
+```
+The above will show the first gallery block of the current post within a loop. The method's full parameters include:
+```
+\DareDev\Block::get(
+    $block_names = [], 
+    $selector = 'first|last|all'|integer, 
+    $post_id = null
+);
+```
+Where `$block_names` is the array of the blocks that you want to search for. 
+
+`$selector` parameter accepts 4 types of values: `first` will get you only the first block that it finds. `last` will show the last and `all` will get you every instance of the given blocks. To make it more specific, you can  pass an integer with the exact position of the block that you want to fetch. For example, on a post with multiple galleries, this:
+```
+echo \DareDev\Block::get( [ 'core/gallery' ], 2 );
+```
+Will display the third gallery of the post (remember that count starts from 0).
+
+With `$post_id` you can pass the id of a specific post. Leaving it empty will get the post of the loop that the method gets called in.
+
 ## Other Helper functions
 ### Get inline SVG from an image ID or URL
 Inline SVG elements allow more flexibility with styling. To get such an inline element from an existing SVG file, use:
@@ -345,8 +369,13 @@ Will return that:
 <span class="mon">Dec</span>
 <span class="day">13</span>	
 ```
+### Search a multidimentional array recursively
+```
+$new_arr = \Helper\array_search($array, $key = '', $value = [] );
+```
+is an alternative to PHP's `array_search()` which can search for multiple values inside a multidimentional array of unknown depth. It will return a new flattened array with the results that it found. 
 
-### Customize settings
+## Customize settings
 The plugin has a few settings that you can manually turn on. To do so, there is the `daredev_settings` filter, which you can use in your theme/plugin like so:
 
 ```
