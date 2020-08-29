@@ -1,5 +1,6 @@
+![DareDev](https://www.gsarigiannidis.gr/wp-content/uploads/2020/08/daredev.jpg)
 # Description
-DareDev is a WordPress MU (Must-Use) plugin which facilitates some development tasks. This is a helper plugin, which means that you don't have to update it on finished projects. I use it to speed-up my development process and I update it based on my own needs, so it is only tested on my preferred development environment, which includes tools like Advanced Custom Fields, _s starter theme, Gravity Forms, WPML. Most of its functionality is build with Classes, though, so if you don't want to install it as it is, you can probably grab parts of it and incorporate them in you own projects. 
+DareDev is a WordPress MU (Must-Use) plugin that facilitates some development tasks. This is a helper plugin, which means that you don't have to update it on finished projects. I use it to speed up my development process and I update it based on my own needs, so it is only tested on my preferred development environment, which includes tools like Advanced Custom Fields, _s starter theme, Gravity Forms, WPML. Most of its functionality is build with Classes, though, so if you don't want to install it as it is, you can probably grab parts of it and incorporate them in your own projects.
 
 # Examples
 The following is only a part of the plugin's available functionality. I will try to update the documentation as frequently as I can. 
