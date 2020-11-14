@@ -89,7 +89,7 @@ class Helper {
 	 *
 	 * @return string
 	 */
-	public static function name_from_url( $url, $pattern = '/(www.|.com|.gr)/' ) {
+	public static function name_from_url( $url, $pattern = '/(www\.|\.com|\.gr)/' ) {
 		return $url ? ucfirst(
 			preg_replace(
 				$pattern,
