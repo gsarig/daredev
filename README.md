@@ -73,7 +73,19 @@ $post_id,
 'my-container-class'
 );
 ```
-
+### Social links with icons
+Similarly, a quick way to display SVG icons with links to your social network profiles:
+```
+$links = [
+    'facebook'  => 'https://www.facebook.com',
+    'twitter'   => 'https://www.twitter.com',
+    'instagram' => 'https://www.instagram.com',
+    'vimeo'     => 'https://www.vimeo.com',
+    'youtube'   => 'https://www.youtube.com',
+];
+echo DareDev\Element::social( $links );
+```
+The array could come from a group of ACF URLs and currently the SVG icons that are included are facebook, instagram, linkedin, pinterest, twitter, vimeo and youtube.
 ### Add numeric pagination
 Numeric pagination with no need for additional plugins. For example this:
 ``` 

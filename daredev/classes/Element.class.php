@@ -87,6 +87,41 @@ class Element {
 				</div>';
 	}
 
+	/**
+	 * Create links with SVG social icons from an array
+	 *
+	 * @param array array ('icon-name' => 'url')
+	 * @param string $before
+	 * @param string $after
+	 * @param string $class_prefix
+	 *
+	 * @return string
+	 */
+	public static function social(
+		$links = [],
+		$before = '<ul>',
+		$after = '</ul>'
+	) {
+		$output = '';
+		if ( $links ) {
+			$sites = '';
+			foreach ( $links as $key => $value ) {
+				$url   = is_array( $value ) ? $value[0] : $value;
+				$name  = Helper::name_from_url( $url );
+				$icon  = Element::inline_svg( WPMU_PLUGIN_DIR . '/daredev/icons/' . strtolower( $name ) . '.svg' );
+				$sites .= ( $url && $icon ) ?
+					'<li class="' . $key . '">
+                        <a href="' . esc_url( $url ) . '" target="_blank">' . $icon . '</a>
+                    </li>'
+					: '';
+			}
+			$output = $before . $sites . $after;
+		}
+
+		return $output;
+	}
+
+
 	private static function get_share_link( $name, $href, $anchor ) {
 		return '<li class="' . esc_attr( $name ) . '"><a href="' . esc_url( $href ) . '" target="_blank" title="' . esc_html( $name ) . '">' . $anchor . '</a></li>';
 	}
@@ -190,35 +225,38 @@ class Element {
 		$output = '';
 		if ( $img ) :
 			$img_url = is_int( $img ) ? get_attached_file( $img ) : $img;
-			ob_start();
-			include $img_url;
-			$icon = ob_get_contents();
-			ob_end_clean();
-			if ( false === $title ) {
-				$icon = Helper::replace_between( $icon, '<title>', '</title>', '' );
-			} elseif ( $title ) {
-				$icon = Helper::replace_between( $icon, '<title>', '</title>', $title );
+			if ( file_exists( $img_url ) ) {
+				ob_start();
+				include $img_url;
+				$icon = ob_get_contents();
+				ob_end_clean();
+				if ( false === $title ) {
+					$icon = Helper::replace_between( $icon, '<title>', '</title>', '' );
+				} elseif ( $title ) {
+					$icon = Helper::replace_between( $icon, '<title>', '</title>', $title );
+				}
+				if ( $class && ! strpos( $icon, 'class="' ) ) {
+					$icon = str_replace( '<svg', '<svg class=""', $icon );
+				}
+				if ( $class || $id ) {
+					$search  = [];
+					$replace = [];
+					array_push(
+						$search,
+						$class ? 'class="' : null,
+						$id ? '<svg' : null
+					);
+					array_push(
+						$replace,
+						$class ? 'class="' . $class . ' ' : null,
+						$id ? '<svg id="' . $id . '" ' : null
+					);
+					$output = str_replace( $search, $replace, $icon );
+				} else {
+					$output = $icon;
+				}
 			}
-			if ( $class && ! strpos( $icon, 'class="' ) ) {
-				$icon = str_replace( '<svg', '<svg class=""', $icon );
-			}
-			if ( $class || $id ) {
-				$search  = [];
-				$replace = [];
-				array_push(
-					$search,
-					$class ? 'class="' : null,
-					$id ? '<svg' : null
-				);
-				array_push(
-					$replace,
-					$class ? 'class="' . $class . ' ' : null,
-					$id ? '<svg id="' . $id . '" ' : null
-				);
-				$output = str_replace( $search, $replace, $icon );
-			} else {
-				$output = $icon;
-			}
+
 		endif;
 
 		return $output;
@@ -291,7 +329,11 @@ class Element {
 		return '<div class="' . $class . '">' . $nav . '</div>';
 	}
 
-	public static function searchBox( $txt = 'Search', $icon = '<i class="icon-search"></i>', $showButton = false ) {
+	public static function searchBox(
+		$txt = 'Search',
+		$icon = '<span class="icon-search"></span>',
+		$showButton = false
+	) {
 		$home_url = esc_url( home_url( '/' ) );
 		$button   = ( $showButton === true ) ? '<input type="submit" class="search-submit" value="' . $txt . '">' : '';
 		echo '<form role="search" method="get" class="navbar-search" action="' . $home_url . '">
