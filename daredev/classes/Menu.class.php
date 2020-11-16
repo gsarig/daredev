@@ -26,6 +26,12 @@ class Menu {
 		add_action( 'wp_enqueue_scripts', array( $this, 'styles' ) );
 	}
 
+	public static function button() {
+		$menu = new Menu();
+
+		return $menu->toggle();
+	}
+
 	public function toggle() {
 
 		$text_class = ( $this->text_class ) ? $this->text_class : 'screen-reader-text';
