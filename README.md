@@ -102,7 +102,7 @@ You can use your own prev/next links and assign a custom class name like so:
 ```
 
 ### Fetch media from Instagram
- Get Instagram media on WordPress using the current Instagram (Facebook) API ([Read details](https://www.gsarigiannidis.gr/instagram-feed-api-after-june-2020/)). Example:
+ Get Instagram media on WordPress using the current Instagram (Facebook) API ([Read the details](https://www.gsarigiannidis.gr/instagram-feed-api-after-june-2020/)). Example:
   
  ``` 
  $media = \DareDev\Instagram::media(TOKEN, USER_ID);
@@ -294,7 +294,7 @@ we get that:
 ```
 ## Gutenberg Helper methods
 ### Get specific blocks from a post
-It's like getting a post's featured image, only with a specific Gutenberg block instead of the photo. In its simplest form all you have to do is this:
+It's like getting a post's featured image, only with a specific Gutenberg block instead of the photo ([Read the details](https://www.gsarigiannidis.gr/wordpress-gutenberg-block-featured-content/)). In its simplest form all you have to do is this:
 ```
 echo \DareDev\Block::get( [ 'core/gallery' ] );
 ```
@@ -320,8 +320,22 @@ With `$post_id` you can pass the id of a specific post. Leaving it empty will ge
 ### Get inline SVG from an image ID or URL
 Inline SVG elements allow more flexibility with styling. To get such an inline element from an existing SVG file, use:
 ``` 
-echo \DareDev\Element::inline_svg( $img_id_or_url, 'example-class', 'example-id' );
+echo \DareDev\Element::inline_svg( $icon_id_path_or_url, 'example-class', 'example-id' );
 ```
+Examples:
+``` 
+\DareDev\Element::inline_svg( 10 );
+```
+...would display the svg icon uploaded to WordPress, with the ID 10.
+``` 
+\DareDev\Element::inline_svg( WPMU_PLUGIN_DIR . '/daredev/icons/caret-right.svg' );
+```
+...would display the icon found on a specific path on the server.
+Finally, if you want to display one of the [icons included in the plugin](https://github.com/gsarig/daredev/tree/master/daredev/icons) you can simply pass the name of icon like so (without the .svg prefix):
+``` 
+\DareDev\Element::inline_svg( 'email' );
+```
+(The list of available icons will probably get updated everytime I need something new for some new project)
 ### Limit the displayed excerpt length
 A replacement of `get_the_excerpt()` which allows you to set the character length. If an actual excerpt has been set by the user, it will not trim it. Trimming only occurs when no excerpt is set and WordPress uses a part of the content. Example usage: 
 ``` 

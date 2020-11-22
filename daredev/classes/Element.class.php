@@ -224,7 +224,13 @@ class Element {
 	public static function inline_svg( $img, $class = '', $id = '', $title = '' ) {
 		$output = '';
 		if ( $img ) :
-			$img_url = is_int( $img ) ? get_attached_file( $img ) : $img;
+
+			$img_url = $img;
+			if ( is_int( $img ) ) {
+				$img_url = get_attached_file( $img );
+			} elseif ( in_array( $img, self::available_icons(), true ) ) {
+				$img_url = WPMU_PLUGIN_DIR . '/daredev/icons/' . $img . '.svg';
+			}
 			if ( file_exists( $img_url ) ) {
 				ob_start();
 				include $img_url;
@@ -263,7 +269,26 @@ class Element {
 	}
 
 	/**
+	 * Get available icons.
+	 *
+	 * @return array
+	 */
+	private static function available_icons() {
+		$path  = WPMU_PLUGIN_DIR . '/daredev/icons/';
+		$files = scandir( $path );
+		$files = array_map(
+			function ( $e ) {
+				return pathinfo( $e, PATHINFO_FILENAME );
+			},
+			$files
+		);
+
+		return array_diff( $files, [ '', '.', '..' ] );
+	}
+
+	/**
 	 * Get custom logo url.
+	 *
 	 * @return bool
 	 */
 	public static function logo_url() {
