@@ -32,7 +32,7 @@ class Block {
 			} elseif ( 'last' === $selector ) {
 				$output = render_block( end( $requested ) );
 			} else {
-				$int = intval( $selector );
+				$int = (int) $selector;
 				if ( isset( $requested[ $int ] ) ) {
 					$output = render_block( $requested[ $int ] );
 				}

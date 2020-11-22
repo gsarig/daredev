@@ -69,7 +69,7 @@ function dd_get_field_replacement() {
 				} else {
 					$data = get_post_meta( $post_id, $repeater, true );
 				}
-				$count = intval( $data );
+				$count = (int)$data;
 
 				for ( $i = 0; $i < $count; $i ++ ) {
 					$value = [];

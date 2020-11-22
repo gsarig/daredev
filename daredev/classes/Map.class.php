@@ -137,7 +137,7 @@ class Map {
 				'desc'     => self::getMapData( 'excerpt' ),
 				'lat'      => self::getMapData( 'lat' ),
 				'lng'      => self::getMapData( 'lng' ),
-				'zoom'     => intval( $this->zoom ),
+				'zoom'     => (int) $this->zoom,
 				'img'      => self::getMapData( 'thumb' ),
 				'more'     => self::getMapData( 'more' ),
 				'icon'     => isset( $this->mapIcon ) ? $this->mapIcon : self::getMapData( 'icon' ),

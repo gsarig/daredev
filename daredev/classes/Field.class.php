@@ -137,7 +137,7 @@ class Field {
 	 * @return string
 	 */
 	public static function pluralize( $text, $number, $lang = 'en' ) {
-		$number = intval( $number );
+		$number = (int) $number;
 
 		return ( $number === 1 && $lang === 'en' ) ? rtrim( $text, 's' ) : $text;
 	}
