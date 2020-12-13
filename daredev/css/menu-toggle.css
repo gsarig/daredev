@@ -1,41 +1,37 @@
-.menu-toggle > .menu-icon {
-    display: inline-block;
-    width: 40px;
-    height: 36px;
-    padding: 5px 7px;
-    border-radius: 3px;
+.menu-toggle {
+    --dd-menu-toggle-size: 18px;
+    width: var(--dd-menu-toggle-size);
+    height: var(--dd-menu-toggle-size);
 }
 
-.main-navigation.toggled .menu-toggle > .menu-icon > span {
-    background: #666;
+.menu-toggle > .menu-icon {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
 .menu-toggle > .menu-icon > span {
     display: block;
-    height: 3px;
+    height: 1px;
     width: 100%;
-    margin: 5px 0;
-    background: #000;
-    -webkit-transition: all 0.5s ease;
+    background: currentColor;
     transition: all 0.5s ease;
 }
 
-.main-navigation.toggled .menu-icon > .first {
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
-    margin-left: 0;
-    margin-top: 14px;
-    width: 27px;
+.site-header.toggled .menu-icon > span {
+    width: 25px;
 }
 
-.main-navigation.toggled .menu-icon > .second {
-    -webkit-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-    margin-left: 0;
-    margin-top: -8px;
-    width: 27px;
+.site-header.toggled .menu-icon > .first {
+    transform: rotate(45deg) translate(4px, 8px);
 }
 
-.main-navigation.toggled .menu-icon > .third {
-    display: none;
+.site-header.toggled .menu-icon > .second {
+    transform: translateX(calc((var(--dd-menu-toggle-size) * 2) * -1));
+    opacity: 0;
+}
+
+.site-header.toggled .menu-icon > .third {
+    transform: rotate(-45deg) translate(4px, -8px);
 }
