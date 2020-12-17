@@ -37,11 +37,7 @@ class Menu {
 		$text_class = ( $this->text_class ) ? $this->text_class : 'screen-reader-text';
 
 		return '<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
-					<span class="menu-icon">
-						<span class="first">&nbsp;</span>
-						<span class="second">&nbsp;</span>
-						<span class="third">&nbsp;</span>
-					</span>
+					<span class="menu-icon"></span>
 					<span class="' . $text_class . '">' . $this->text . '</span>
 				</button>';
 	}

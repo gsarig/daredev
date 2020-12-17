@@ -2,6 +2,7 @@
     --dd-menu-toggle-size: 18px;
     width: var(--dd-menu-toggle-size);
     height: var(--dd-menu-toggle-size);
+    position: relative;
 }
 
 .menu-toggle > .menu-icon {
@@ -11,27 +12,45 @@
     height: 100%;
 }
 
-.menu-toggle > .menu-icon > span {
+.menu-toggle > .menu-icon,
+.menu-toggle::before,
+.menu-toggle::after {
     display: block;
-    height: 1px;
+    height: 2px;
     width: 100%;
     background: currentColor;
     transition: all 0.5s ease;
 }
 
-.site-header.toggled .menu-icon > span {
+.menu-toggle::before,
+.menu-toggle::after {
+    content: '';
+    position: absolute;
+}
+
+.menu-toggle::before {
+    top: 0;
+}
+
+.menu-toggle::after {
+    bottom: 0;
+}
+
+.main-navigation.toggled .menu-icon,
+.main-navigation.toggled .menu-toggle::before,
+.main-navigation.toggled .menu-toggle::after {
     width: 25px;
 }
 
-.site-header.toggled .menu-icon > .first {
+.main-navigation.toggled .menu-toggle::before {
     transform: rotate(45deg) translate(4px, 8px);
 }
 
-.site-header.toggled .menu-icon > .second {
-    transform: translateX(calc((var(--dd-menu-toggle-size) * 2) * -1));
+.main-navigation.toggled .menu-icon {
+    transform: translateX(calc((var(--dd-menu-toggle-size) * 2)));
     opacity: 0;
 }
 
-.site-header.toggled .menu-icon > .third {
-    transform: rotate(-45deg) translate(4px, -8px);
+.main-navigation.toggled .menu-toggle::after {
+    transform: rotate(-45deg) translate(4px, -7px);
 }
