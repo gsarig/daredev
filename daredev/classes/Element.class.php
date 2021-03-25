@@ -332,11 +332,16 @@ class Element {
 	 */
 
 	public static function numericPagination(
+		$query = null,
 		$prev = '<span class="numbered__pagination-prev">&laquo;<span class="screen-reader-text">Previous</span></span>',
 		$next = '<span class="numbered__pagination-next">&raquo;<span class="screen-reader-text">Next</span></span>',
 		$class = 'numbered__pagination-container'
 	) {
-		global $wp_query;
+		if ( $query ) {
+			$wp_query = $query;
+		} else {
+			global $wp_query;
+		}
 
 		$big        = 999999999; // need an unlikely integer
 		$translated = __( 'Page', 'daredev' );
@@ -351,7 +356,7 @@ class Element {
 			'before_page_number' => '<span class="screen-reader-text">' . $translated . ' </span>',
 		) );
 
-		return '<div class="' . $class . '">' . $nav . '</div>';
+		return $nav ? '<div class="' . $class . '">' . $nav . '</div>' : '';
 	}
 
 	public static function searchBox(
