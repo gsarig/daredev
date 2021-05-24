@@ -42,7 +42,9 @@ class Helper {
 	/**
 	 * Get page template ID by template name
 	 *
-	 * @param $page_template_name
+	 * @param $page_template_name The name of the template, without .php
+	 * @param string $post_type The post type to search. Defaults to page
+	 * @param string $path The path where the page templates are being stored. Defaults to page-templates/
 	 *
 	 * @return string
 	 */
@@ -50,14 +52,15 @@ class Helper {
 		$args    = [
 			'post_type'    => $post_type,
 			'fields'       => 'ids',
-			'nopaging'     => true,
+			'nopaging'     => false,
+			'numberposts'  => 1,
 			'hierarchical' => 0,
 			'meta_key'     => '_wp_page_template',
 			'meta_value'   => $path . $page_template_name . '.php',
 		];
 		$entries = get_posts( $args );
 
-		return $entries ? $entries[0] : '';
+		return $entries[0] ?? '';
 	}
 
 	/**
